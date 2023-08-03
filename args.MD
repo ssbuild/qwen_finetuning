@@ -53,8 +53,6 @@ MASTER_ADDR=10.0.0.1 MASTER_PORT=6667 WORLD_SIZE=12 NODE_RANK=2 python train.py
         global_args = {
            "load_in_8bit": False, # lora 如果显卡支持int8 可以开启 ， 需安装依赖 pip install bitsandbytes
            "num_layers_freeze": -1, # 非lora,非p-tuning 模式 ， <= config.json num_layers
-           "pre_seq_len":  None,    #p-tuning-v2 参数
-           "prefix_projection": False, #p-tuning-v2 参数
            "num_layers": -1, # 是否使用骨干网络的全部层数 最大1-28， -1 表示全层, 否则只用只用N层
         }
          lora_info_args = {
@@ -77,8 +75,6 @@ MASTER_ADDR=10.0.0.1 MASTER_PORT=6667 WORLD_SIZE=12 NODE_RANK=2 python train.py
     global_args = {
             "load_in_8bit": False, # lora 如果显卡支持int8 可以开启 ， 需安装依赖 pip install bitsandbytes
             "num_layers_freeze": -1, # 非lora,非p-tuning 模式 ， <= config.json num_layers
-            "pre_seq_len":  32,    #p-tuning-v2 参数
-            "prefix_projection": False, #p-tuning-v2 参数
             "num_layers": -1, # 是否使用骨干网络的全部层数 最大1-28， -1 表示全层, 否则只用只用N层
         }
 
@@ -92,8 +88,6 @@ MASTER_ADDR=10.0.0.1 MASTER_PORT=6667 WORLD_SIZE=12 NODE_RANK=2 python train.py
     global_args = {
             "load_in_8bit": False, # lora 如果显卡支持int8 可以开启 ， 需安装依赖 pip install bitsandbytes
             "num_layers_freeze": 14, # 非lora,非p-tuning 模式 ， <= config.json num_layers
-            "pre_seq_len":  None,    #p-tuning-v2 参数
-            "prefix_projection": False, #p-tuning-v2 参数
             "num_layers": -1, # 是否使用骨干网络的全部层数 最大1-28， -1 表示全层, 否则只用只用N层
     }
     
@@ -107,8 +101,6 @@ MASTER_ADDR=10.0.0.1 MASTER_PORT=6667 WORLD_SIZE=12 NODE_RANK=2 python train.py
     global_args = {
             "load_in_8bit": False, # lora 如果显卡支持int8 可以开启 ， 需安装依赖 pip install bitsandbytes
             "num_layers_freeze": -1, # 非lora,非p-tuning 模式 ， <= config.json num_layers
-            "pre_seq_len":  None,    #p-tuning-v2 参数
-            "prefix_projection": False, #p-tuning-v2 参数
             "num_layers": -1, # 是否使用骨干网络的全部层数 最大1-28， -1 表示全层, 否则只用只用N层
         }
    lora_info_args = {
