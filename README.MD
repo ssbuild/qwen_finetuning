@@ -17,6 +17,12 @@ dev 通过一下方式安装
 pip install -U git+https://github.com/ssbuild/aigc_zoo.git
 pip install -U git+https://github.com/ssbuild/deep_training.git --no-deps --force-reinstall
 pip install -U transformers>=4.30 deepspeed tiktoken einops bitsandbytes>=0.39 accelerate>=0.20
+
+
+git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
+cd flash-attention && pip install .
+pip install csrc/layer_norm
+pip install csrc/rotary
 ```
 
 
