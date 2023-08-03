@@ -43,7 +43,7 @@ class TokenTruncation:
     def process(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, ensure_answer_min_length=1,sup=True):
         prefix,paragraph = data
         ds = []
-        for sid,(p,q,a) in enumerate(paragraph):
+        for sid,(q,a) in enumerate(paragraph):
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
                                    system = prefix or "" ,
                                    max_window_size = 6144,
@@ -72,7 +72,7 @@ class TokenSiding:
 
         prefix, paragraph = data
         ds = []
-        for sid, (p,q,a) in enumerate(paragraph):
+        for sid, (q,a) in enumerate(paragraph):
             _, a_ids = make_context(tokenizer=tokenizer, query=q, history=paragraph[:sid],
                                     system=prefix or "",
                                     max_window_size=6144,
