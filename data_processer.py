@@ -42,9 +42,9 @@ class TokenTruncation:
     @classmethod
     def process(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sptoken: typing.List,ensure_answer_min_length=1,sup=True):
         ds = []
-        for sid,(q,a) in enumerate(paragraph):
+        for sid,(p,q,a) in enumerate(paragraph):
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
-                                   system = "",
+                                   system = p or "" ,
                                    max_window_size = 6144,
                                    chat_format = "chatml",)
             b_ids = tokenizer.encode(add_special_tokens=False)
@@ -71,9 +71,9 @@ class TokenSiding:
             sliding_size = max_seq_length
 
         ds = []
-        for sid, (q, a) in enumerate(paragraph):
+        for sid, (p,q,a) in enumerate(paragraph):
             _, a_ids = make_context(tokenizer=tokenizer, query=q, history=paragraph[:sid],
-                                    system="",
+                                    system=p or "",
                                     max_window_size=6144,
                                     chat_format="chatml", )
             b_ids = tokenizer.encode(add_special_tokens=False)

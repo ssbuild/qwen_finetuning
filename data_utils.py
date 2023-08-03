@@ -101,7 +101,9 @@ class NN_DataHelper(DataHelper):
                 if line_id < 10:
                     print(paragraph)
 
-                paragraph = [(preprocess(session['q']),
+                paragraph = [(
+                              preprocess(session.get('p',None)),
+                              preprocess(session['q']),
                               preprocess('\n'.join(session['a'])) if isinstance(session['a'],list) else preprocess(session['a']))
                     for session in paragraph]
 
