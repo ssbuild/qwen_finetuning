@@ -39,10 +39,22 @@ if __name__ == '__main__':
 
     model = pl_model.get_llm_model()
 
-    if hasattr(model,'is_loaded_in_4bit') or hasattr(model,'is_loaded_in_8bit'):
-        model.eval().cuda()
+    # if hasattr(model,'is_loaded_in_4bit') or hasattr(model,'is_loaded_in_8bit'):
+    #     model.eval().cuda()
+    # else:
+    #     model.half().eval().cuda()
+
+    model = model.eval()
+    model.requires_grad_(False)
+    if not model.quantized:
+        # 按需修改，目前只支持 4/8 bit 量化 ， 可以保存量化模型
+        model.half().quantize(4).cuda()
+        # 保存量化权重
+        # model.save_pretrained('qwen-chat-7b-int4',max_shard_size="4GB")
+        # exit(0)
     else:
-        model.half().eval().cuda()
+        # 已经量化
+        model.half().cuda()
 
     text_list = [
         "写一个诗歌，关于冬天",

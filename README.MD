@@ -24,7 +24,7 @@ pip install -U transformers>=4.30 deepspeed tiktoken einops bitsandbytes>=0.39 a
 
  - [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
  - [Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat)
-
+ - [qwen-7b-chat-int4](https://huggingface.co/ssbuild/qwen-7b-chat-int4)
 
 
 

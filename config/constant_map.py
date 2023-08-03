@@ -20,6 +20,13 @@ train_info_models = {
         'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat/',
     },
 
+    'qwen-7b-chat-int4': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4',
+        'config_name': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4/config.json',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4/',
+    },
+
 }
 
 # 'target_modules': ['query_key_value'],  # bloom,gpt_neox
