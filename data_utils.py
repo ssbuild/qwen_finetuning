@@ -100,7 +100,7 @@ class NN_DataHelper(DataHelper):
                     print(paragraph)
 
                 paragraph = [(
-                              preprocess(session.get('p',None)),
+                              session.get('p',None),
                               preprocess(session['q']),
                               preprocess('\n'.join(session['a'])) if isinstance(session['a'],list) else preprocess(session['a']))
                     for session in paragraph]
