@@ -32,9 +32,9 @@ if __name__ == '__main__':
 
 
     pl_model = MyTransformer(config=config, model_args=model_args,
-                             # torch_dtype=torch.float16,
-                             device_map="cuda:0",
-                             quantization_config=quantization_config,
+                             torch_dtype=torch.float16,
+                             # device_map="cuda:0",
+                             # quantization_config=quantization_config,
                              )
 
     model = pl_model.get_llm_model()
