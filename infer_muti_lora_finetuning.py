@@ -60,7 +60,7 @@ if __name__ == '__main__':
     with lora_model.disable_adapter():
         for input in text_list:
             #lora_model 调用子对象方法
-            response, history = lora_model.chat(tokenizer, input, history=[], max_length=2048,    
+            response, history = lora_model.chat(tokenizer, input, history=[], max_new_tokens=512,
                                            do_sample=True, top_p=0.7, temperature=0.95, )
             print("input", input)
             print("response", response)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     for input in text_list:
         # lora_model 调用子对象方法
-        response, history = lora_model.chat(tokenizer, input, history=[], max_length=2048,     
+        response, history = lora_model.chat(tokenizer, input, history=[], max_new_tokens=512,
                                             do_sample=True, top_p=0.7, temperature=0.95, )
         print("input", input)
         print("response", response)
