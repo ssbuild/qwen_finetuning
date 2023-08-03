@@ -49,8 +49,6 @@ class NN_DataHelper(DataHelper):
         self.index += 1
         paragraph = data
 
-
-
         max_seq_length = self.max_seq_length_dict[mode]
         tokenizer: QWenTokenizer = self.tokenizer # noqa
         config: QWenConfig = self.config # noqa
@@ -111,8 +109,6 @@ class NN_DataHelper(DataHelper):
         return D
 
     def collate_fn(self,batch):
-        if not hasattr(self,'sptoken'):
-            self.sptoken = self.tokenizer.encode(text="")[-2:]
 
         o = {}
         for i, b in enumerate(batch):
