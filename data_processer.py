@@ -40,11 +40,12 @@ class TokenIdsFinal:
 class TokenTruncation:
 
     @classmethod
-    def process(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, ensure_answer_min_length=1,sup=True):
+    def process(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, ensure_answer_min_length=1,sup=True):
+        prefix,paragraph = data
         ds = []
         for sid,(p,q,a) in enumerate(paragraph):
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
-                                   system = p or "" ,
+                                   system = prefix or "" ,
                                    max_window_size = 6144,
                                    chat_format = "chatml",)
             b_ids = tokenizer.encode(a,add_special_tokens=False)
@@ -65,14 +66,15 @@ class TokenTruncation:
 
 class TokenSiding:
     @classmethod
-    def process(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sliding_size = None,sup=True):
+    def process(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sliding_size = None,sup=True):
         if sliding_size is None:
             sliding_size = max_seq_length
 
+        prefix, paragraph = data
         ds = []
         for sid, (p,q,a) in enumerate(paragraph):
             _, a_ids = make_context(tokenizer=tokenizer, query=q, history=paragraph[:sid],
-                                    system=p or "",
+                                    system=prefix or "",
                                     max_window_size=6144,
                                     chat_format="chatml", )
             b_ids = tokenizer.encode(a,add_special_tokens=False)

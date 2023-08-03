@@ -47,7 +47,7 @@ class NN_DataHelper(DataHelper):
     # 切分词
     def on_data_process(self, data: typing.Any, mode: str):
         self.index += 1
-        paragraph = data
+
 
         max_seq_length = self.max_seq_length_dict[mode]
         tokenizer: QWenTokenizer = self.tokenizer # noqa
@@ -55,9 +55,9 @@ class NN_DataHelper(DataHelper):
 
         strategy = data_conf['strategy']
         if strategy == DataStrategy.truncation:
-            ds = TokenTruncation.process(tokenizer,config,paragraph, max_seq_length,**data_conf[strategy])
+            ds = TokenTruncation.process(tokenizer,config,data, max_seq_length,**data_conf[strategy])
         elif strategy == DataStrategy.siding:
-            ds = TokenSiding.process(tokenizer,config,paragraph, max_seq_length, **data_conf[strategy])
+            ds = TokenSiding.process(tokenizer,config,data, max_seq_length, **data_conf[strategy])
         else:
             raise ValueError('Invlid strategy',strategy)
 
@@ -68,21 +68,7 @@ class NN_DataHelper(DataHelper):
             print(ds[0])
         return ds
 
-    # {
-    #     "id": 0, "paragraph": [
-    #     # 一轮会话
-    #     {
-    #         "q": "从南京到上海的路线",
-    #         "a": [
-    #             "你好，南京到上海的路线如下：",
-    #             "1. 南京到上海，可以乘坐南京地铁1号线，在南京站乘坐轨道交通1号线。",
-    #             "2. 南京到浦东机场，可以搭乘上海地铁1号，在陆家嘴站乘坐地铁1线，在浦东国际机场站乘坐机场快线，前往上海浦东国际机场。",
-    #             "3. 上海到南京，可以换乘上海地铁2号线，从南京站换乘地铁2线，再从南京南站换乘地铁1路，然后到达上海站"
-    #         ]
-    #     }
-    #     # 二轮....
-    # ]
-    # }
+
 
     # 读取文件
     def on_get_corpus(self, files: typing.List, mode: str):
@@ -99,17 +85,15 @@ class NN_DataHelper(DataHelper):
                 if line_id < 10:
                     print(paragraph)
 
-                paragraph = [(
-                              session.get('p',None),
-                              preprocess(session['q']),
+                prefix = jd.get('p','')
+                paragraph = [(preprocess(session['q']),
                               preprocess('\n'.join(session['a'])) if isinstance(session['a'],list) else preprocess(session['a']))
                     for session in paragraph]
 
-                D.append(paragraph)
+                D.append((prefix,paragraph))
         return D
 
     def collate_fn(self,batch):
-
         o = {}
         for i, b in enumerate(batch):
             if i == 0:
