@@ -66,7 +66,7 @@ if __name__ == '__main__':
     ]
     for input in text_list:
         response, history = model.chat(tokenizer, input, history=[],max_length=2048,
-                                            eos_token_id=config.eos_token_id,
+                                            
                                             do_sample=True, top_p=0.7, temperature=0.95,)
         print("input",input)
         print("response", response)

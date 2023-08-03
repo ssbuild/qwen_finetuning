@@ -22,8 +22,7 @@ if __name__ == '__main__':
     output_weight_dir = './best_ckpt'
 
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
-    config_kwargs = {"pre_seq_len": global_args["pre_seq_len"],
-                     "prefix_projection": global_args["prefix_projection"]}
+    config_kwargs = {}
     if global_args["num_layers"] > 0:
         config_kwargs["num_layers"] = global_args["num_layers"]
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
@@ -31,14 +30,6 @@ if __name__ == '__main__':
                                                                    config_kwargs=config_kwargs)
 
 
-    if config.quantization_bit !=0 and not config.pre_seq_len:
-        raise AssertionError("quantization only support ptv2 finetuning")
-
-    if config.quantization_bit != 0 and lora_args is not None:
-        raise AssertionError("quantization only support ptv2 finetuning")
-
-    if config.pre_seq_len is not None and lora_args is not None:
-        raise ValueError('with lora and ptuning v2 cannot open at the same time')
 
     dataHelper.make_dataset_all()
 

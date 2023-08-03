@@ -20,8 +20,6 @@ global_args = {
     # load_in_4bit 量化配置
     "quantization_config": None,
     "num_layers_freeze": -1, # 非lora,非p-tuning 模式 ， <= config.json num_layers
-    "pre_seq_len": None,    #p-tuning-v2 参数 , None 禁用p-tuning-v2
-    "prefix_projection": False, #p-tuning-v2 参数
     "num_layers": -1, # 是否使用骨干网络的全部层数 最大1-28， -1 表示全层, 否则只用只用N层
 }
 

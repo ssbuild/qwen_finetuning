@@ -2,7 +2,7 @@
 # @Time    : 2023/3/9 15:29
 import torch
 from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
-from transformers import HfArgumentParser
+from transformers import HfArgumentParser, BitsAndBytesConfig
 from data_utils import train_info_args, NN_DataHelper
 from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,LoraArguments,setup_model_profile, QWenConfig
 
@@ -20,7 +20,22 @@ if __name__ == '__main__':
     tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config(
         tokenizer_class_name=QWenTokenizer, config_class_name=QWenConfig)
 
-    pl_model = MyTransformer(config=config, model_args=model_args, torch_dtype=torch.float16,)
+    # quantization configuration for NF4 (4 bits)
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type='nf4',
+        bnb_4bit_compute_dtype=torch.bfloat16
+    )
+
+    # # quantization configuration for Int8 (8 bits)
+    # quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+
+
+    pl_model = MyTransformer(config=config, model_args=model_args,
+                             # torch_dtype=torch.float16,
+                             device_map="cuda:0",
+                             quantization_config=quantization_config,
+                             )
 
     model = pl_model.get_llm_model()
     model.half().cuda()
@@ -32,7 +47,6 @@ if __name__ == '__main__':
     ]
     for input in text_list:
         response, history = model.chat(tokenizer, input, history=[], max_length=2048,
-                                       eos_token_id=config.eos_token_id,
                                        do_sample=True, top_p=0.7, temperature=0.95, )
         print("input", input)
         print("response", response)

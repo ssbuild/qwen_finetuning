@@ -21,6 +21,8 @@ pip install -U transformers>=4.30 deepspeed xformers bitsandbytes>=0.39 accelera
 
 ## weight
 
+ - [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
+ - [Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat)
 
 
 
@@ -100,16 +102,21 @@ pip install -U transformers>=4.30 deepspeed xformers bitsandbytes>=0.39 accelera
 ## 友情链接
 
 - [pytorch-task-example](https://github.com/ssbuild/pytorch-task-example)
-- [tf-task-example](https://github.com/ssbuild/tf-task-example)
 - [chatmoss_finetuning](https://github.com/ssbuild/chatmoss_finetuning)
 - [chatglm_finetuning](https://github.com/ssbuild/chatglm_finetuning)
-- [chatyuan_finetuning](https://github.com/ssbuild/chatyuan_finetuning)
+- [chatglm2_finetuning](https://github.com/ssbuild/chatglm2_finetuning)
+- [t5_finetuning](https://github.com/ssbuild/t5_finetuning)
 - [llm_finetuning](https://github.com/ssbuild/llm_finetuning)
-- [rlhf_llm](https://github.com/ssbuild/rlhf_llm)
-- [rlhf_chatglm](https://github.com/ssbuild/rlhf_chatglm)
-- [rlhf_chatyuan](https://github.com/ssbuild/rlhf_chatyuan)
+- [llm_rlhf](https://github.com/ssbuild/llm_rlhf)
+- [chatglm_rlhf](https://github.com/ssbuild/chatglm_rlhf)
+- [t5_rlhf](https://github.com/ssbuild/t5_rlhf)
 - [rwkv_finetuning](https://github.com/ssbuild/rwkv_finetuning)
-
+- [baichuan_finetuning](https://github.com/ssbuild/baichuan_finetuning)
+- [baichuan2_finetuning](https://github.com/ssbuild/baichuan2_finetuning)
+- [internlm_finetuning](https://github.com/ssbuild/internlm_finetuning)
+- [qwen_finetuning](https://github.com/ssbuild/qwen_finetuning)
+## 
+    纯粹而干净的代码
 
 ## 
     纯粹而干净的代码

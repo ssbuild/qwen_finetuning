@@ -7,6 +7,7 @@ import os
 import typing
 import numpy as np
 import torch
+from aigc_zoo.model_zoo.qwen.qwen_generation_utils import get_ltor_masks_and_position_ids
 from deep_training.data_helper import DataHelper, ModelArguments, TrainingArguments, DataArguments
 from fastdatasets.record import load_dataset as Loader, RECORD, WriterObject, gfile
 from tqdm import tqdm
@@ -14,7 +15,6 @@ from transformers import HfArgumentParser
 from data_processer import DataStrategy, TokenSiding, TokenTruncation
 from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,LoraArguments,QWenConfig
 from config import *
-
 data_conf = {
    'strategy': DataStrategy.truncation, # 数据策略选项
     DataStrategy.truncation: {
@@ -47,26 +47,19 @@ class NN_DataHelper(DataHelper):
     # 切分词
     def on_data_process(self, data: typing.Any, mode: str):
         self.index += 1
-        prompt = data[0]
-        answer = data[1]
+        paragraph = data
+
 
 
         max_seq_length = self.max_seq_length_dict[mode]
-        tokenizer: QWenTokenizer = self.tokenizer
-        config: QWenConfig = self.config
-
-        if not hasattr(self, 'sptoken'):
-            self.sptoken = tokenizer.encode(text="")[-2:]
-
-        a_ids = tokenizer.encode(text=prompt, add_special_tokens=False)
-        b_ids = tokenizer.encode(text=answer, add_special_tokens=False)
-
+        tokenizer: QWenTokenizer = self.tokenizer # noqa
+        config: QWenConfig = self.config # noqa
 
         strategy = data_conf['strategy']
         if strategy == DataStrategy.truncation:
-            ds = TokenTruncation.process(tokenizer,config,a_ids, b_ids, max_seq_length, self.sptoken ,**data_conf[strategy])
+            ds = TokenTruncation.process(tokenizer,config,paragraph, max_seq_length,**data_conf[strategy])
         elif strategy == DataStrategy.siding:
-            ds = TokenSiding.process(tokenizer,config, a_ids, b_ids, max_seq_length, self.sptoken, **data_conf[strategy])
+            ds = TokenSiding.process(tokenizer,config,paragraph, max_seq_length, **data_conf[strategy])
         else:
             raise ValueError('Invlid strategy',strategy)
 
@@ -107,19 +100,12 @@ class NN_DataHelper(DataHelper):
                 paragraph = jd['paragraph']
                 if line_id < 10:
                     print(paragraph)
-                #兼容支持 answer string
+
                 paragraph = [(preprocess(session['q']),
                               preprocess('\n'.join(session['a'])) if isinstance(session['a'],list) else preprocess(session['a']))
                     for session in paragraph]
-                for sid,(q,a) in enumerate(paragraph):
-                    assert len(a),ValueError('answer cannot empty')
-                    prompt_text = ''
-                    for j in range(sid + 1):
-                        if j != sid:
-                            prompt_text += "[Round {}]\n\n问：{}\n\n答：{}\n\n".format(j + 1, paragraph[j][0], paragraph[j][1])
-                        else:
-                            prompt_text += "[Round {}]\n\n问：{}\n\n答：".format(j + 1, paragraph[j][0])
-                    D.append((prompt_text,a))
+
+                D.append(paragraph)
         return D
 
     def collate_fn(self,batch):
@@ -141,7 +127,14 @@ class NN_DataHelper(DataHelper):
         max_len = torch.max(seqlens).tolist()
         input_ids = o['input_ids'][:, :max_len]
 
-        attention_mask,position_ids = build_masks_and_position_ids_glm(input_ids,seqlens)
+        attention_mask, _, position_ids = get_ltor_masks_and_position_ids(
+            input_ids,
+            eod_token=self.config.eos_token_id,
+            reset_position_ids=False,
+            reset_attention_mask=False,
+            eod_mask_loss=False,
+        )
+
         o['input_ids'] = input_ids.long()
         o['attention_mask'] = attention_mask.bool()
         o['position_ids'] = position_ids.long()
