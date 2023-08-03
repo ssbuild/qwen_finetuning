@@ -38,8 +38,11 @@ if __name__ == '__main__':
                              )
 
     model = pl_model.get_llm_model()
-    model.half().cuda()
-    model = model.eval()
+
+    if hasattr(model,'is_loaded_in_4bit') or hasattr(model,'is_loaded_in_8bit'):
+        model.eval().cuda()
+    else:
+        model.half().eval().cuda()
 
     text_list = [
         "写一个诗歌，关于冬天",
