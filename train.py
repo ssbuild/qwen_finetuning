@@ -24,7 +24,7 @@ if __name__ == '__main__':
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
     config_kwargs = {}
     if global_args["num_layers"] > 0:
-        config_kwargs["num_layers"] = global_args["num_layers"]
+        config_kwargs["n_layer"] = global_args["num_layers"]
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
@@ -80,13 +80,9 @@ if __name__ == '__main__':
     #恢复权重继续训练
     # pl_model.load_sft_weight('./best_ckpt/best.pt',is_trainable=True)
 
-    if config.pre_seq_len is not None:
-        # P-tuning v2
-        pl_model.get_llm_model().half()
-        pl_model.get_llm_model().transformer.prefix_encoder.float()
-    else:
-        # Finetune
-        pl_model = pl_model.float()
+
+    # Finetune
+    pl_model = pl_model.float()
 
 
     def dataset_loader_filter_fn(dataset):
