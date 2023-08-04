@@ -3,7 +3,7 @@
 import os
 import torch
 from deep_training.data_helper import ModelArguments, DataArguments
-from transformers import HfArgumentParser
+from transformers import HfArgumentParser, GenerationConfig
 from data_utils import train_info_args, NN_DataHelper,global_args
 from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,LoraArguments
 
@@ -53,9 +53,24 @@ if __name__ == '__main__':
             "写一个诗歌，关于冬天",
             "晚上睡不着应该怎么办",
         ]
+
+        model.generation_config = GenerationConfig(**{
+            "chat_format": "chatml",
+            "decay_bound": 0.0,
+            "decay_factor": 1.0,
+            "eos_token_id": 151643,
+            "factual_nucleus_sampling": False,
+            "max_context_size": 1024,
+            "max_generate_size": 512,
+            "max_new_tokens": 512,
+            "pad_token_id": 151643,
+            "stop_words_ids": [[151643]],
+            "do_sample": True,
+            "top_k": 0,
+            "top_p": 0.8,
+        })
         for input in text_list:
-            response, history = model.chat(tokenizer, input, history=[], max_new_tokens=512,    
-                                           do_sample=True, top_p=0.7, temperature=0.95, )
+            response, history = model.chat(tokenizer, input, history=[], generation_config=generation_config )
             print("input", input)
             print("response", response)
 

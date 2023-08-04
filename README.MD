@@ -95,7 +95,7 @@ a answer   must
    
 
 ![inference](data/1.png)
-![inference](data/2.png)
+
 
 
 
