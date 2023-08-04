@@ -94,7 +94,7 @@ a answer   must
 
    
 
-![inference](data/1.png)
+![inference](asserts/1.png)
 
 
 
