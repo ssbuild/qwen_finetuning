@@ -70,7 +70,7 @@ if __name__ == '__main__':
         "max_generate_size": 512,
         "max_new_tokens": 512,
         "pad_token_id": 151643,
-        "stop_words_ids": [[151643]],
+        #"stop_words_ids": [[151643]],
         "do_sample": True,
         "top_k": 0,
         "top_p": 0.8,

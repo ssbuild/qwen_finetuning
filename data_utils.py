@@ -11,7 +11,7 @@ from aigc_zoo.model_zoo.qwen.qwen_generation_utils import get_ltor_masks_and_pos
 from deep_training.data_helper import DataHelper, ModelArguments, TrainingArguments, DataArguments
 from fastdatasets.record import load_dataset as Loader, RECORD, WriterObject, gfile
 from tqdm import tqdm
-from transformers import HfArgumentParser
+from transformers import HfArgumentParser, PreTrainedTokenizer
 from data_processer import DataStrategy, TokenSiding, TokenTruncation
 from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,LoraArguments,QWenConfig
 from config import *
@@ -36,6 +36,7 @@ def preprocess(text):
 def postprocess(text):
   # return text.replace("\\n", "\n").replace("\\t", "\t")
   return text
+
 
 
 
@@ -112,8 +113,8 @@ class NN_DataHelper(DataHelper):
         attention_mask, _, position_ids = get_ltor_masks_and_position_ids(
             input_ids,
             eod_token=self.config.eos_token_id,
-            reset_position_ids=False,
-            reset_attention_mask=False,
+            reset_position_ids=True,
+            reset_attention_mask=True,
             eod_mask_loss=False,
         )
 
