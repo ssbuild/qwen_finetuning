@@ -70,7 +70,7 @@ if __name__ == '__main__':
             "top_p": 0.8,
         })
         for input in text_list:
-            response, history = model.chat(tokenizer, input, history=[], generation_config=generation_config )
+            response, history = model.chat(tokenizer, input, history=[],)
             print("input", input)
             print("response", response)
 
