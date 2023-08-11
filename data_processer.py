@@ -91,7 +91,7 @@ def make_context(
 
 class TokenIdsFinal:
     @classmethod
-    def process(cls,input_ids: typing.List,labels,max_seq_length,tokenizer):
+    def process(cls,input_ids: typing.List,labels,max_seq_length,eos_token_id):
 
         input_ids = np.asarray(input_ids, dtype=np.int32)
         labels = np.asarray(labels, dtype=np.int32)
@@ -99,7 +99,7 @@ class TokenIdsFinal:
         pad_len = max_seq_length - seqlen
 
         if pad_len:
-            pad_val = tokenizer.eos_token_id
+            pad_val = eos_token_id
             input_ids = np.pad(input_ids, (0, pad_len), 'constant', constant_values=(pad_val, pad_val))
             labels = np.pad(labels, (0, pad_len), 'constant', constant_values=(-100, -100))
 
@@ -136,7 +136,7 @@ class TokenTruncation:
                 labels = copy.deepcopy(input_ids)
 
 
-            d = TokenIdsFinal.process(input_ids,labels,max_seq_length,tokenizer)
+            d = TokenIdsFinal.process(input_ids,labels,max_seq_length,config.eos_token_id)
             ds.append(d)
         return ds
 
@@ -169,6 +169,6 @@ class TokenSiding:
                 pos += sliding_size
                 if np.all(np.asarray(labels) == -100):
                     continue
-                d = TokenIdsFinal.process(input_ids,labels,max_seq_length,tokenizer)
+                d = TokenIdsFinal.process(input_ids,labels,max_seq_length,config.eos_token_id)
                 ds.append(d)
         return ds

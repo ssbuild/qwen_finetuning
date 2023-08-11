@@ -33,18 +33,29 @@ async def create_item(request: Request):
     global model, tokenizer
     json_post_raw = await request.json()
     json_post = json.dumps(json_post_raw)
-    json_post_list = json.loads(json_post)
-    prompt = json_post_list.get('prompt')
-    history = json_post_list.get('history')
-    max_length = json_post_list.get('max_length')
-    top_p = json_post_list.get('top_p')
-    temperature = json_post_list.get('temperature')
-    response, history = model.chat(tokenizer,
-                                   prompt,
-                                   history=history,
-                                   max_length=max_length if max_length else 2048,
-                                   top_p=top_p if top_p else 0.7,
-                                   temperature=temperature if temperature else 0.95)
+    json_args= json.loads(json_post)
+    prompt = json_args.pop('prompt')
+    history = json_args.pop('history',None)
+
+    gen_args = {
+        "chat_format": "chatml",
+        "decay_bound": 0.0,
+        "decay_factor": 1.0,
+        "eos_token_id": 151643,
+        "factual_nucleus_sampling": False,
+        "max_context_size": 1024,
+        "max_generate_size": 512,
+        "max_new_tokens": 512,
+        "pad_token_id": 151643,
+        # "stop_words_ids": [[151643]],
+        "do_sample": True,
+        "top_k": 0,
+        "top_p": 0.8,
+    }
+    gen_args.update(json_args)
+    generation_config = GenerationConfig(**gen_args)
+
+    response, history = model.chat(tokenizer, prompt, history=[],generation_config=generation_config)
     now = datetime.datetime.now()
     time = now.strftime("%Y-%m-%d %H:%M:%S")
     answer = {
@@ -61,8 +72,8 @@ async def create_item(request: Request):
 
 if __name__ == '__main__':
     train_info_args['seed'] = None
-    parser = HfArgumentParser((ModelArguments, DataArguments))
-    model_args, data_args = parser.parse_dict(train_info_args,allow_extra_keys=True)
+    parser = HfArgumentParser((ModelArguments, ))
+    (model_args,)  = parser.parse_dict(train_info_args,allow_extra_keys=True)
 
     setup_model_profile()
 
