@@ -24,7 +24,7 @@ if __name__ == '__main__':
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
     config_kwargs = {}
     if global_args["num_layers"] > 0:
-        config_kwargs["n_layer"] = global_args["num_layers"]
+        config_kwargs["num_hidden_layers"] = global_args["num_layers"]
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
