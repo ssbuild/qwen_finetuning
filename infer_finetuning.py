@@ -66,15 +66,10 @@ if __name__ == '__main__':
     ]
     generation_config = GenerationConfig(**{
         "chat_format": "chatml",
-        "decay_bound": 0.0,
-        "decay_factor": 1.0,
         "eos_token_id": 151643,
-        "factual_nucleus_sampling": False,
-        "max_context_size": 1024,
-        "max_generate_size": 512,
         "max_new_tokens": 512,
         "pad_token_id": 151643,
-        #"stop_words_ids": [[151643]],
+        # "stop_words_ids": [[151643]],
         "do_sample": True,
         "top_k": 0,
         "top_p": 0.8,
