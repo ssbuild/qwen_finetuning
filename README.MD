@@ -2,7 +2,7 @@
 - [deep_training](https://github.com/ssbuild/deep_training)
 
 ```text
-    08-11 update config , 更新下官方权重配置文件 
+    08-11 aigc-zoo 0.1.17.post0 update config , 更新下官方权重配置文件 
     dev 分支加一些新功能和想法 如果求稳定，请使用 stable分支
 
 ```
