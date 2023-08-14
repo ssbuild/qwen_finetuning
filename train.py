@@ -25,6 +25,7 @@ if __name__ == '__main__':
     config_kwargs = {}
     if global_args["num_layers"] > 0:
         config_kwargs["num_hidden_layers"] = global_args["num_layers"]
+    config: QWenConfig
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
@@ -62,7 +63,9 @@ if __name__ == '__main__':
         num_sanity_val_steps=0,
         strategy=strategy,
         #lora int8 precision='32'
-        precision= '16' , #  #可以自行尝试  "32": "32-true", "16": "16-mixed", "bf16": "bf16-mixed"
+        # 可以自行尝试  "32": "32-true", "16": "16-mixed", "bf16": "bf16-mixed"
+        precision= 'bf16' if torch.cuda.is_bf16_supported() else '16',
+
     )
 
 
@@ -82,7 +85,10 @@ if __name__ == '__main__':
 
 
     # Finetune
-    pl_model = pl_model.float()
+    if config.bf16:
+        pl_model = pl_model.bfloat16()
+    else:
+        pl_model = pl_model.float()
 
 
     def dataset_loader_filter_fn(dataset):
