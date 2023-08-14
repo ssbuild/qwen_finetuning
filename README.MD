@@ -35,8 +35,9 @@ pip install csrc/rotary
 
 
 ## data sample
-   第三方羊驼数据 https://github.com/hikariming/alpaca_chinese_dataset
-    单条数据示例
+   open_data https://github.com/ssbuild/open_data
+    
+单条数据示例
 
 ```text
 p prefix  optional
