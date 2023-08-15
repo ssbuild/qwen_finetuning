@@ -30,6 +30,10 @@ if __name__ == '__main__':
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
 
+    if torch.cuda.is_bf16_supported():
+        config.bf16 = True
+        config.fp16 = False
+        config.fp32 = False
 
 
     dataHelper.make_dataset_all()
