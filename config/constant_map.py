@@ -49,3 +49,6 @@ train_target_modules_maps = {
     'cpmant' : ['project_q','project_v'],
     'rwkv' : ['key','value','receptance'],
 }
+
+# 量化权重不支持此模式训练
+train_model_config = train_info_models['Qwen-7B-Chat']
