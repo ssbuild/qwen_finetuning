@@ -9,11 +9,11 @@ from lightning.pytorch.callbacks import LearningRateMonitor
 from lightning.pytorch.strategies import DeepSpeedStrategy
 from transformers import HfArgumentParser
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config,global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,EffiArguments,QWenConfig, setup_model_profile
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,PetlArguments,QWenConfig, setup_model_profile
 
             
 if __name__ == '__main__':
-    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, EffiArguments))
+    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments))
     model_args, training_args, data_args, lora_args = parser.parse_dict(train_info_args)
     lora_args = lora_args.config
 
@@ -30,21 +30,10 @@ if __name__ == '__main__':
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
 
-    is_bf16_supported = torch.cuda.is_bf16_supported()
-    if is_bf16_supported:
+    if torch.cuda.is_bf16_supported():
         config.bf16 = True
         config.fp16 = False
         config.fp32 = False
-
-        # 精度 根据实际情况做调整
-    if is_bf16_supported:
-        precision = 'bf16'
-    else:
-        precision = '16'
-
-    if global_args["quantization_config"] is not None and global_args["quantization_config"].load_in_8bit:
-        precision = "32"
-
 
 
     dataHelper.make_dataset_all()
@@ -80,8 +69,9 @@ if __name__ == '__main__':
         accumulate_grad_batches=training_args.gradient_accumulation_steps,
         num_sanity_val_steps=0,
         strategy=strategy,
+        #lora int8 precision='32'
         # 可以自行尝试  "32": "32-true", "16": "16-mixed", "bf16": "bf16-mixed"
-        precision= precision,
+        precision= 'bf16' if torch.cuda.is_bf16_supported() else '16',
 
     )
 

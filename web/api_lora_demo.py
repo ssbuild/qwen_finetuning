@@ -7,7 +7,7 @@ import torch
 
 from deep_training.data_helper import ModelArguments, DataArguments
 from deep_training.nlp.models.qwen.modeling_qwen import setup_model_profile, QWenConfig
-from deep_training.nlp.models.lora.v2 import EffiArguments
+from deep_training.nlp.models.lora.v2 import PetlArguments
 from transformers import HfArgumentParser
 
 from data_utils import train_info_args, NN_DataHelper,global_args
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     config = QWenConfig.from_pretrained(ckpt_dir)
     
 
-    lora_args = EffiArguments.from_pretrained(ckpt_dir)
+    lora_args = PetlArguments.from_pretrained(ckpt_dir)
 
     assert lora_args.inference_mode == True
 

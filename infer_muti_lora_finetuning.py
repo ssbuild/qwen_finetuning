@@ -6,7 +6,7 @@ from deep_training.data_helper import ModelArguments, DataArguments
 from transformers import HfArgumentParser, GenerationConfig
 from data_utils import train_info_args, NN_DataHelper, global_args
 from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer, setup_model_profile, QWenConfig, \
-    EffiArguments,LoraModel
+    PetlArguments,PetlModel
 
 if __name__ == '__main__':
     train_info_args['seed'] = None
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     ckpt_dir = './best_ckpt/last'
     config = QWenConfig.from_pretrained(ckpt_dir)
 
-    lora_args = EffiArguments.from_pretrained(ckpt_dir)
+    lora_args = PetlArguments.from_pretrained(ckpt_dir)
 
     assert lora_args.inference_mode == True
 
@@ -48,8 +48,8 @@ if __name__ == '__main__':
 
     pl_model.eval().half().cuda()
 
-    # backbone model replaced LoraModel
-    lora_model: LoraModel = pl_model.backbone
+    # backbone model replaced PetlModel
+    lora_model: PetlModel = pl_model.backbone
 
     text_list = [
         "写一个诗歌，关于冬天",
