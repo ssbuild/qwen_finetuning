@@ -5,7 +5,7 @@ import torch
 from deep_training.data_helper import ModelArguments, DataArguments
 from transformers import HfArgumentParser, GenerationConfig
 from data_utils import train_info_args, NN_DataHelper,global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,LoraArguments
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,PetlArguments
 
 
 if __name__ == '__main__':
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     ckpt_dir = './best_ckpt/last'
     config = QWenConfig.from_pretrained(ckpt_dir)
     
-    lora_args = LoraArguments.from_pretrained(ckpt_dir)
+    lora_args = PetlArguments.from_pretrained(ckpt_dir)
 
     assert lora_args.inference_mode == True
 
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     pl_model = MyTransformer(config=config, model_args=model_args, lora_args=lora_args,
                              torch_dtype=torch.float16,
                              # new_num_tokens=new_num_tokens,#扩充词
-                             # load_in_8bit=global_args["load_in_8bit"],
+                             
                              # # device_map="auto",
                              # device_map = {"":0} # 第一块卡
                              )

@@ -4,7 +4,7 @@ import torch
 from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
 from transformers import HfArgumentParser, GenerationConfig
 from data_utils import train_info_args, NN_DataHelper, get_deepspeed_config
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,LoraArguments
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,PetlArguments
 
 deep_config = get_deepspeed_config()
 

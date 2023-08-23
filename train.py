@@ -9,11 +9,11 @@ from lightning.pytorch.callbacks import LearningRateMonitor
 from lightning.pytorch.strategies import DeepSpeedStrategy
 from transformers import HfArgumentParser
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config,global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,LoraArguments,QWenConfig, setup_model_profile
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,PetlArguments,QWenConfig, setup_model_profile
 
             
 if __name__ == '__main__':
-    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, LoraArguments))
+    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments))
     model_args, training_args, data_args, lora_args = parser.parse_dict(train_info_args)
     lora_args = lora_args.config
 
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         strategy=strategy,
         #lora int8 precision='32'
         # 可以自行尝试  "32": "32-true", "16": "16-mixed", "bf16": "bf16-mixed"
-        precision= 'bf16' if torch.cuda.is_bf16_supported() else '16',
+        precision='bf16' if torch.cuda.is_bf16_supported() else '16',
 
     )
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     pl_model = MyTransformer(config=config, model_args=model_args, training_args=training_args, lora_args=lora_args,
                              num_layers_freeze=global_args["num_layers_freeze"],#
                              quantization_config=global_args["quantization_config"],
-                             load_in_8bit=global_args["load_in_8bit"],
+
                              device_map={"": trainer.local_rank} if trainer.world_size > 1 else "auto",
                              torch_dtype=torch.float16,
                              # new_num_tokens=len(tokenizer),  # 可能扩充词 , 还有一些隐藏token, 如果不需要可自行注释
