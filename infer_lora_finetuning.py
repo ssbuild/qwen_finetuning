@@ -32,7 +32,7 @@ if __name__ == '__main__':
     pl_model = MyTransformer(config=config, model_args=model_args, lora_args=lora_args,
                              torch_dtype=torch.float16,
                              # new_num_tokens=new_num_tokens,#扩充词
-                             # load_in_8bit=global_args["load_in_8bit"],
+                             
                              # # device_map="auto",
                              # device_map = {"":0} # 第一块卡
                              )
