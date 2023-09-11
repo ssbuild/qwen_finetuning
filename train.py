@@ -75,8 +75,7 @@ if __name__ == '__main__':
 
     )
 
-
-    pl_model = MyTransformer(config=config, model_args=model_args, training_args=training_args, lora_args=lora_args,
+    transformer_args = dict(config=config, model_args=model_args, training_args=training_args, lora_args=lora_args,
                              num_layers_freeze=global_args["num_layers_freeze"],#
                              quantization_config=global_args["quantization_config"],
 
@@ -84,6 +83,11 @@ if __name__ == '__main__':
                              torch_dtype=torch.float16,
                              # new_num_tokens=len(tokenizer),  # 可能扩充词 , 还有一些隐藏token, 如果不需要可自行注释
                              )
+
+    if transformer_args["quantization_config"] is None:
+        transformer_args.pop("device_map")
+
+    pl_model = MyTransformer(**transformer_args)
 
     config.save_pretrained(output_weight_dir)
 
