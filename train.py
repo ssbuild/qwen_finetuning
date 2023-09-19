@@ -34,11 +34,21 @@ if __name__ == '__main__':
         config.bf16 = True
         config.fp16 = False
         config.fp32 = False
-
+    else:
+        config.bf16 = False
+        config.fp16 = True
+        config.fp32 = False
 
     dataHelper.make_dataset_all()
 
-    deepspeed_config = get_deepspeed_config()
+
+    is_bf16_supported = torch.cuda.is_bf16_supported()
+    # 精度 根据实际情况做调整
+    if is_bf16_supported:
+        precision = 'bf16'
+    else:
+        precision = '16'
+    deepspeed_config = get_deepspeed_config(precision)
     strategy = 'ddp' if torch.cuda.device_count() > 1 else 'auto'
     if deepspeed_config is not None and len(deepspeed_config):
         strategy = DeepSpeedStrategy(config=deepspeed_config, )
@@ -71,7 +81,7 @@ if __name__ == '__main__':
         strategy=strategy,
         #lora int8 precision='32'
         # 可以自行尝试  "32": "32-true", "16": "16-mixed", "bf16": "bf16-mixed"
-        precision='bf16' if torch.cuda.is_bf16_supported() else '16',
+        precision=precision,
 
     )
 
