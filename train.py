@@ -106,10 +106,10 @@ if __name__ == '__main__':
 
 
     # Finetune
-    if config.bf16:
-        pl_model = pl_model.bfloat16()
-    else:
-        pl_model = pl_model.float()
+    # if config.bf16:
+    #     pl_model = pl_model.bfloat16()
+    # else:
+    #     pl_model = pl_model.float()
 
 
     def dataset_loader_filter_fn(dataset):
