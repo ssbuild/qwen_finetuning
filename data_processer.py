@@ -121,7 +121,7 @@ class TokenTruncation:
         ds = []
         for sid,(q,a) in enumerate(paragraph):
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
-                                   system = prefix or "" ,
+                                   system = prefix or "You are a helpful assistant." ,
                                    max_window_size = 6144,
                                    chat_format = "chatml",)
             b_ids = tokenizer.encode(a,add_special_tokens=False)
@@ -150,7 +150,7 @@ class TokenSiding:
         ds = []
         for sid, (q,a) in enumerate(paragraph):
             _, a_ids = make_context(tokenizer=tokenizer, query=q, history=paragraph[:sid],
-                                    system=prefix or "",
+                                    system=prefix or "You are a helpful assistant.",
                                     max_window_size=6144,
                                     chat_format="chatml", )
             b_ids = tokenizer.encode(a,add_special_tokens=False)
