@@ -8,12 +8,12 @@ import typing
 import numpy as np
 import torch
 from aigc_zoo.model_zoo.qwen.qwen_generation_utils import get_ltor_masks_and_position_ids
-from deep_training.data_helper import DataHelper, ModelArguments, TrainingArguments, DataArguments
+from deep_training.data_helper import DataHelper, ModelArguments, TrainingArguments, DataArguments, TrainingArgumentsHF
 from fastdatasets.record import load_dataset as Loader, RECORD, WriterObject, gfile
 from tqdm import tqdm
 from transformers import HfArgumentParser, PreTrainedTokenizer
 from data_processer import DataStrategy, TokenSiding, TokenTruncation
-from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,PetlArguments,QWenConfig
+from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,PetlArguments,QWenConfig,PromptArguments
 from config import *
 data_conf = {
    'strategy': DataStrategy.truncation, # 数据策略选项
@@ -147,18 +147,11 @@ class NN_DataHelper(DataHelper):
         seqlens = o.pop('seqlen')
         max_len = torch.max(seqlens).tolist()
         input_ids = o['input_ids'][:, :max_len]
-
-        attention_mask, _, position_ids = get_ltor_masks_and_position_ids(
-            input_ids,
-            eod_token=self.config.eos_token_id,
-            reset_position_ids=True,
-            reset_attention_mask=True,
-            eod_mask_loss=False,
-        )
-
+        attention_mask = torch.zeros_like(input_ids,dtype=torch.bool)
+        for i,seqlen in enumerate(seqlens):
+            attention_mask[i,:seqlen] = 1
         o['input_ids'] = input_ids.long()
-        o['attention_mask'] = attention_mask.bool()
-        o['position_ids'] = position_ids.long()
+        o['attention_mask'] = attention_mask
         o['labels'] = o['labels'][:, :max_len].long()
         return o
 
@@ -181,41 +174,21 @@ class NN_DataHelper(DataHelper):
             self.make_dataset_with_args(data_args.test_file, mode='test',schema=schema)
 
 if __name__ == '__main__':
-    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments))
-    model_args, training_args, data_args, lora_args = parser.parse_dict(train_info_args)
-    lora_args = lora_args.config
+    if global_args["trainer_backend"] == "hf":
+        parser = HfArgumentParser((ModelArguments, TrainingArgumentsHF, DataArguments, PetlArguments, PromptArguments),
+                                  conflict_handler='resolve')
+        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,allow_extra_keys=True, )
+    else:
+        parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments, PromptArguments))
+        model_args, training_args, data_args, lora_args, _ = parser.parse_dict(train_info_args)
 
+    lora_args = lora_args.config
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
     tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,config_class_name=QWenConfig)
     
-
-
 
     # 缓存数据集
     # 检测是否存在 output/dataset_0-train.record ，不存在则制作数据集
     dataHelper.make_dataset_all()
 
 
-    # def shuffle_records(record_filenames, outfile, compression_type='GZIP'):
-    #     print('shuffle_records record...')
-    #     options = RECORD.TFRecordOptions(compression_type=compression_type)
-    #     dataset_reader = Loader.RandomDataset(record_filenames, options=options, with_share_memory=True)
-    #     data_size = len(dataset_reader)
-    #     all_example = []
-    #     for i in tqdm(range(data_size), desc='load records'):
-    #         serialized = dataset_reader[i]
-    #         all_example.append(serialized)
-    #     dataset_reader.close()
-    #
-    #     shuffle_idx = list(range(data_size))
-    #     random.shuffle(shuffle_idx)
-    #     writer = WriterObject(outfile, options=options)
-    #     for i in tqdm(shuffle_idx, desc='shuffle record'):
-    #         example = all_example[i]
-    #         writer.write(example)
-    #     writer.close()
-    #
-    #
-    # # 对每个record 再次打乱
-    # for filename in dataHelper.train_files:
-    #     shuffle_records(filename, filename)

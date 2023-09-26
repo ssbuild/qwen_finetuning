@@ -9,22 +9,24 @@ from lightning.pytorch.callbacks import LearningRateMonitor
 from lightning.pytorch.strategies import DeepSpeedStrategy
 from transformers import HfArgumentParser
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config,global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,PetlArguments,QWenConfig, setup_model_profile
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,PetlArguments,PromptArguments,QWenConfig, setup_model_profile
 
+assert global_args["trainer_backend"] == "pl"
             
 if __name__ == '__main__':
-    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments))
-    model_args, training_args, data_args, lora_args = parser.parse_dict(train_info_args)
+    parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments,PromptArguments))
+    model_args, training_args, data_args, lora_args,prompt_args = parser.parse_dict(train_info_args)
     lora_args = lora_args.config
+    prompt_args = prompt_args.config
 
     setup_model_profile()
 
     output_weight_dir = './best_ckpt'
 
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
-    config_kwargs = {}
-    if global_args["num_layers"] > 0:
-        config_kwargs["num_hidden_layers"] = global_args["num_layers"]
+    config_kwargs = {"torch_dtype": torch.float16}
+    if global_args["config_merge"]:
+        config_kwargs.update(global_args["config_merge"])
     config: QWenConfig
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
                                                                    config_class_name=QWenConfig,
@@ -85,14 +87,13 @@ if __name__ == '__main__':
 
     )
 
-    transformer_args = dict(config=config, model_args=model_args, training_args=training_args, lora_args=lora_args,
-                             num_layers_freeze=global_args["num_layers_freeze"],#
-                             quantization_config=global_args["quantization_config"],
-
-                             device_map={"": trainer.local_rank} if trainer.world_size > 1 else "auto",
-                             torch_dtype=torch.float16,
-                             # new_num_tokens=len(tokenizer),  # 可能扩充词 , 还有一些隐藏token, 如果不需要可自行注释
-                             )
+    transformer_args = dict(config=config,  model_args=model_args, training_args=training_args, lora_args=lora_args,
+                            prompt_args=prompt_args,
+                            quantization_config=global_args["quantization_config"],
+                            device_map={"": trainer.local_rank} if trainer.world_size > 1 else "auto",
+                            torch_dtype=torch.float16,
+                            # new_num_tokens=len(tokenizer),  # 可能扩充词 , 还有一些隐藏token, 如果不需要可自行注释
+                            )
 
     if transformer_args["quantization_config"] is None:
         transformer_args.pop("device_map")

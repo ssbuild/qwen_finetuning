@@ -2,6 +2,9 @@
 - [deep_training](https://github.com/ssbuild/deep_training)
 
 ```text
+
+    09-25 0.2.4 support qwen-7b 新版 和 qwen-14b ， 旧版不再支持，旧版可以安装 deep_training <= 0.2.3
+                support transformers trainer
     08-11 aigc-zoo 0.1.17.post0 update config , 更新下官方权重配置文件 
     dev 分支加一些新功能和想法 如果求稳定，请使用 stable分支
 
@@ -14,9 +17,6 @@
   - 如果无法安装 , 可以切换官方源 pip install -i https://pypi.org/simple -U -r requirements.txt  
 
 ```text
-# dev 通过一下方式安装
-pip install -U git+https://github.com/ssbuild/aigc_zoo.git
-pip install -U transformers>=4.30 deepspeed tiktoken einops bitsandbytes>=0.39 accelerate>=0.20
 
 # flash-attention对显卡算例要求算力7.5 以上 ， 下面可选安装 ，如果卡不支持可以不安装。
 git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
@@ -30,7 +30,8 @@ pip install csrc/rotary
 
  - [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
  - [Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat)
- - [qwen-7b-chat-int4](https://huggingface.co/ssbuild/qwen-7b-chat-int4)
+ - [Qwen-14B](https://huggingface.co/Qwen/Qwen-14B)
+ - [Qwen-14B-Chat](https://huggingface.co/Qwen/Qwen-14B-Chat)
 
 
 
