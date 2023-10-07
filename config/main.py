@@ -75,8 +75,8 @@ def patch_args(train_info_args):
         train_info_args.pop('lora', None)
         train_info_args.pop('adalora', None)
         train_info_args.pop('ia3', None)
-        if hasattr(train_info_args,"gradient_checkpointing"):
-            train_info_args.gradient_checkpointing = False
+        if "gradient_checkpointing" in train_info_args:
+            train_info_args[ "gradient_checkpointing" ] = False
     else:
         train_info_args.pop('lora',None)
         train_info_args.pop('adalora', None)
