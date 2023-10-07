@@ -2,7 +2,8 @@
 - [deep_training](https://github.com/ssbuild/deep_training)
 
 ```text
-
+    10-07 support colossalai trainer
+    09-26 support transformers trainer
     09-25 0.2.4 support qwen-7b 新版 和 qwen-14b ， 旧版不再支持，旧版可以安装 deep_training <= 0.2.3
                 support transformers trainer
     08-11 aigc-zoo 0.1.17.post0 update config , 更新下官方权重配置文件 
@@ -118,13 +119,23 @@ a answer   must
 
 ## training
 ```text
-    制作数据
+    #制作数据
     python data_utils.py
     注: num_process_worker 为多进程制作数据 ， 如果数据量较大 ， 适当调大至cpu数量
     dataHelper.make_dataset_with_args(data_args.train_file,mixed_data=False, shuffle=True,mode='train',num_process_worker=0)
     
-    训练
+    #pl 训练
     python train.py
+    
+    #hf 训练
+    python -m torch.distributed.launch --nproc_per_node=1 train_hf.py
+    
+    # 多机多卡
+    python -m torch.distributed.launch --nproc_per_node=1 --node_rank $NODE_RANK --master_addr $MASTER_ADDR --master_port $MASTER_PORT train_hf.py
+
+   
+    # colossalai 训练 
+    colossalai run --nproc_per_node 1 --num_nodes 1 train_cl.py
 ```
 
 ## 训练参数

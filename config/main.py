@@ -12,7 +12,7 @@ from transformers import BitsAndBytesConfig
 global_args = {
     # 训练配置
     **dict(
-        trainer_backend ='pl', # one of pl , hf
+        trainer_backend ='pl', # one of pl , hf , cl
         enable_deepspeed = False,
         enable_ptv2 = False,
         enable_lora = True,
@@ -38,16 +38,18 @@ global_args = {
 
 
 if global_args["enable_lora"]:
-    from config.sft_config_lora import train_info_args,train_info_args_hf,train_model_config
+    from config.sft_config_lora import train_info_args,train_info_args_hf,train_info_args_colossalai,train_model_config
 elif global_args["enable_ptv2"]:
     raise NotImplemented
 else:
-    from config.sft_config import train_info_args,train_info_args_hf,train_model_config
+    from config.sft_config import train_info_args,train_info_args_hf,train_info_args_colossalai,train_model_config
 
+assert global_args["trainer_backend"] in ["pl","hf","cl"]
 
-if global_args["trainer_backend"] == 'hf':
+if global_args["trainer_backend"] == "hf":
     train_info_args = train_info_args_hf
-
+elif global_args["trainer_backend"] == "cl":
+    train_info_args = train_info_args_colossalai
 
 
 
@@ -64,8 +66,6 @@ def patch_args(train_info_args):
 
     if global_args["enable_lora"]:
         #检查lora adalora是否开启
-        if 'lora' not in train_info_args and 'adalora' not in train_info_args:
-            raise ValueError('please config lora or adalora')
         assert train_info_args.get('lora',{}).get('with_lora',False) + \
             train_info_args.get('adalora',{}).get('with_lora',False) + \
             train_info_args.get('ia3',{}).get('with_lora',False) == 1 , ValueError('lora adalora ia3 can set one at same time !')
