@@ -145,7 +145,7 @@ def main():
     # 加载sft权重
     # pl_model.load_sft_weight('./best_ckpt/best.pt',is_trainable=True)
 
-    pl_model = pl_model.float() if not is_bf16_supported else pl_model.bfloat16()
+    pl_model = pl_model.float()
 
     train_datasets = None
     if training_args.do_train:
