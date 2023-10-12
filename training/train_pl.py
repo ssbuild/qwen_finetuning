@@ -35,24 +35,40 @@ def main():
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
 
-    if torch.cuda.is_bf16_supported():
-        config.bf16 = True
-        config.fp16 = False
-        config.fp32 = False
-    else:
-        config.bf16 = False
-        config.fp16 = True
-        config.fp32 = False
+
 
     dataHelper.make_dataset_all()
 
 
     is_bf16_supported = torch.cuda.is_bf16_supported()
+    precision = global_args["precision"]
+    if precision == "auto":
+        # 精度 根据实际情况做调整
+        if is_bf16_supported:
+            precision = 'bf16'
+        else:
+            precision = '16'
+
+        if global_args["quantization_config"] is not None and global_args["quantization_config"].load_in_8bit:
+            precision = "32"
+
     # 精度 根据实际情况做调整
-    if is_bf16_supported:
-        precision = 'bf16'
+    if precision == "bf16":
+        config.bf16 = True
+        config.fp16 = False
+        config.fp32 = False
+    elif precision == "16":
+        config.bf16 = False
+        config.fp16 = True
+        config.fp32 = False
+    elif precision == "32":
+        config.bf16 = False
+        config.fp16 = False
+        config.fp32 = True
     else:
-        precision = '16'
+        raise NotImplemented
+
+
     deepspeed_config = get_deepspeed_config(precision)
     strategy = 'ddp' if torch.cuda.device_count() > 1 else 'auto'
     if deepspeed_config is not None and len(deepspeed_config):

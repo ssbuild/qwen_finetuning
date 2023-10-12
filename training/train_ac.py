@@ -69,23 +69,35 @@ def main():
         dataHelper.make_dataset_all()
 
     is_bf16_supported = torch.cuda.is_bf16_supported()
+    precision = global_args["precision"]
+    if precision == "auto":
+        # 精度 根据实际情况做调整
+        if is_bf16_supported:
+            precision = 'bf16'
+        else:
+            precision = '16'
+
+        if global_args["quantization_config"] is not None and global_args["quantization_config"].load_in_8bit:
+            precision = "32"
+
+
     # 精度 根据实际情况做调整
-    if is_bf16_supported:
-        precision = 'bf16'
+    if precision == "bf16":
         config.bf16 = True
         config.fp16 = False
         config.fp32 = False
-    else:
-        precision = '16'
+    elif precision == "16":
         config.bf16 = False
         config.fp16 = True
         config.fp32 = False
-
-    if global_args["quantization_config"] is not None and global_args["quantization_config"].load_in_8bit:
-        precision = "32"
+    elif precision == "32":
         config.bf16 = False
         config.fp16 = False
         config.fp32 = True
+    else:
+        raise NotImplemented
+
+
 
     if str(precision) == '16':
         training_args.fp16 = True

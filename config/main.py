@@ -39,6 +39,9 @@ train_info_args = load_config()
 global_args = train_info_args.pop("global_args")
 train_model_config = MODELS_MAP[global_args["model_name"]]
 assert global_args["trainer_backend"] in ["pl","hf","cl","ac"]
+
+global_args["precision"] = str(global_args["precision"])
+
 if global_args["quantization_config"]:
     #精度
     if global_args["precision"] == "auto":
