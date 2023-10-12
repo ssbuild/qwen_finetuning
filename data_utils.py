@@ -16,18 +16,19 @@ from deep_training.data_helper import DataHelper, ModelArguments, TrainingArgume
 from fastdatasets.record import load_dataset as Loader, RECORD, WriterObject, gfile
 from tqdm import tqdm
 from transformers import HfArgumentParser, PreTrainedTokenizer
-from data_processer import DataStrategy, TokenSiding, TokenTruncation
+from data_processer import DataStrategy, TokenIdsMaker
 from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,PetlArguments,QWenConfig,PromptArguments
 from config import *
 data_conf = {
    'strategy': DataStrategy.truncation, # 数据策略选项
     DataStrategy.truncation: {
-        'ensure_answer_min_length': 1,
         'sup': True, # 是否监督训练
     },
     DataStrategy.siding: {
-        'sliding_size': train_info_args['max_seq_length'] // 3 * 2, #prompt滑动窗口大小
-        'sup': True, # 是否监督训练
+        'stride': int(train_info_args['max_seq_length'] / 3 * 2),
+        'sup': True, # 是否监督模式
+        "src_max_length": train_info_args['max_seq_length'] - 10,
+        "dst_max_length": None,
     },
 
 }
@@ -60,9 +61,9 @@ class NN_DataHelper(DataHelper):
 
         strategy = data_conf['strategy']
         if strategy == DataStrategy.truncation:
-            ds = TokenTruncation.process(tokenizer,config,data, max_seq_length,**data_conf[strategy])
+            ds = TokenIdsMaker.tunction(tokenizer,config,data, max_seq_length,**data_conf[strategy])
         elif strategy == DataStrategy.siding:
-            ds = TokenSiding.process(tokenizer,config,data, max_seq_length, **data_conf[strategy])
+            ds = TokenIdsMaker.slidding(tokenizer,config,data, max_seq_length, **data_conf[strategy])
         else:
             raise ValueError('Invlid strategy',strategy)
 

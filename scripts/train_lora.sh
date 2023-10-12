@@ -21,7 +21,7 @@ do
 done
 
 
-if [[ "${trainer_backend}" == "dataset" ]]
+if [[ "${mode}" == "dataset" ]]
 then
     python ../data_utils.py
 else

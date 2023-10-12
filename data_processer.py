@@ -89,35 +89,34 @@ def make_context(
     return raw_text, context_tokens
 
 
-class TokenIdsFinal:
-    @classmethod
-    def process(cls,input_ids: typing.List,labels,max_seq_length,eos_token_id):
 
-        input_ids = np.asarray(input_ids, dtype=np.int32)
-        labels = np.asarray(labels, dtype=np.int32)
-        seqlen = np.asarray(len(input_ids), dtype=np.int32)
-        pad_len = max_seq_length - seqlen
-
-        if pad_len:
-            pad_val = eos_token_id
-            input_ids = np.pad(input_ids, (0, pad_len), 'constant', constant_values=(pad_val, pad_val))
-            labels = np.pad(labels, (0, pad_len), 'constant', constant_values=(-100, -100))
-
-        d = {
-            'input_ids': input_ids,
-            'labels': labels,
-            'seqlen': seqlen,
-        }
-        return d
 
 
 #对prompt 截断
 
-class TokenTruncation:
+class TokenIdsMaker:
 
     @classmethod
-    def process(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, ensure_answer_min_length=1,sup=True):
+    def final(cls, tokenizer,config, input_ids, labels, max_seq_length):
+        seqlen = np.asarray(len(input_ids), dtype=np.int32)
+        pad_len = max_seq_length - seqlen
+        input_ids = np.asarray(input_ids, dtype=np.int32)
+        labels = np.asarray(labels, dtype=np.int32)
+        if pad_len:
+            pad_val = config.eos_token_id or tokenizer.eos_token_id
+            input_ids = np.pad(input_ids, (0, pad_len), 'constant', constant_values=(pad_val, pad_val))
+            labels = np.pad(labels, (0, pad_len), 'constant', constant_values=(-100, -100))
+        d = {
+            'input_ids': input_ids,
+            'labels': labels,
+            'seqlen': seqlen
+        }
+        return d
+
+    @classmethod
+    def tunction(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sup=True):
         prefix,paragraph = data
+        sptoken = [ ]
         ds = []
         for sid,(q,a) in enumerate(paragraph):
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
@@ -126,26 +125,27 @@ class TokenTruncation:
                                    chat_format = "chatml",)
             b_ids = tokenizer.encode(a,add_special_tokens=False)
 
-            a_max_len = max_seq_length - len(b_ids) - 3 - ensure_answer_min_length
-            input_ids = a_ids[-a_max_len:] + b_ids
-            a_len = len(input_ids) - len(b_ids)
-            input_ids = input_ids[:max_seq_length - 3] + [config.eos_token_id]
-            if sup:
-                labels = [-100] * a_len + input_ids[a_len:]
-            else:
-                labels = copy.deepcopy(input_ids)
-
-
-            d = TokenIdsFinal.process(input_ids,labels,max_seq_length,config.eos_token_id)
-            ds.append(d)
+            while len(a_ids) + len(b_ids) > max_seq_length - len(sptoken) - 1:
+                if len(b_ids) > len(a_ids):
+                    b_ids.pop(-1)
+                else:
+                    a_ids.pop(0)
+            b_ids += [ config.eos_token_id ]
+            input_ids = a_ids + b_ids
+            labels = copy.deepcopy(input_ids) if not sup else [ -100 ] * len(a_ids) + copy.deepcopy(b_ids)
+            input_ids = sptoken + input_ids
+            labels = sptoken + labels if not sup else [ -100 ] * len(sptoken) + labels
+            assert len(input_ids) <= max_seq_length
+            ds.append(cls.final(tokenizer,config, input_ids, labels, max_seq_length))
         return ds
 
-class TokenSiding:
+
     @classmethod
-    def process(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sliding_size = None,sup=True):
+    def slidding(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sliding_size = None,src_max_length=None,dst_max_length=None,sup=True):
         if sliding_size is None:
             sliding_size = max_seq_length
 
+        sptoken = [ ]
         prefix, paragraph = data
         ds = []
         for sid, (q,a) in enumerate(paragraph):
@@ -155,6 +155,11 @@ class TokenSiding:
                                     chat_format="chatml", )
             b_ids = tokenizer.encode(a,add_special_tokens=False)
 
+            if src_max_length and src_max_length > 0:
+                a_ids = a_ids[ :src_max_length ]
+            if dst_max_length and dst_max_length > 0:
+                b_ids = b_ids[ :dst_max_length ]
+
             input_ids_qa = a_ids + b_ids + [config.eos_token_id]
             if sup:
                 labels_all = [-100] * len(a_ids) + b_ids
@@ -163,12 +168,13 @@ class TokenSiding:
 
             pos = 0
             while pos < len(input_ids_qa):
-                input_ids = input_ids_qa[pos:pos + max_seq_length]
-                labels = labels_all[pos:pos + max_seq_length]
+                input_ids = input_ids_qa[pos:pos + max_seq_length - len(sptoken)]
+                labels = labels_all[pos:pos + max_seq_length - len(sptoken)]
 
                 pos += sliding_size
                 if np.all(np.asarray(labels) == -100):
                     continue
-                d = TokenIdsFinal.process(input_ids,labels,max_seq_length,config.eos_token_id)
-                ds.append(d)
+                input_ids = sptoken + input_ids
+                labels = sptoken + labels if not sup else [ -100 ] * len(sptoken) + labels
+                ds.append(cls.final(tokenizer, config,input_ids, labels, max_seq_length))
         return ds

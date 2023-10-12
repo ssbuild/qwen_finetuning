@@ -122,7 +122,11 @@ a answer   must
 ```text
     # 制作数据
     cd scripts
-    bash train_full.sh dataset
+    bash train_full.sh -m dataset 
+    or
+    bash train_lora.sh -m dataset 
+    or
+    bash train_ptv2.sh -m dataset 
     
     注: num_process_worker 为多进程制作数据 ， 如果数据量较大 ， 适当调大至cpu数量
     dataHelper.make_dataset_with_args(data_args.train_file,mixed_data=False, shuffle=True,mode='train',num_process_worker=0)
