@@ -13,10 +13,10 @@ __all__ = [
     "TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING",
     "TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING",
     "TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING",
-    "train_model_config"
+    "MODELS_MAP"
 ]
 
-train_info_models = {
+MODELS_MAP = {
     'Qwen-7B': {
         'model_type': 'qwen',
         'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-7B',
@@ -46,5 +46,3 @@ train_info_models = {
 # TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING
 # TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING
 
-# 量化权重不支持此模式训练
-train_model_config = train_info_models['Qwen-7B-Chat']

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/9/25 12:29
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+
 import logging
 import math
-import os
-import sys
-from contextlib import nullcontext
 import datasets
 import torch
 import transformers
-from deep_training.trainer.cl.trainer import TrainerCL
+from deep_training.trainer.ac.trainer import TrainerAC
 from transformers import (
     HfArgumentParser,
     default_data_collator,
@@ -20,13 +21,12 @@ from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config, global_args
 from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments,QWenTokenizer,QWenConfig
-from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsCL
+from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsAC
 
-assert global_args["trainer_backend"] == "cl"
+assert global_args["trainer_backend"] == "ac"
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
 check_min_version("4.33.2")
-
 
 logger = logging.getLogger(__name__)
 
@@ -38,18 +38,23 @@ logging.basicConfig(
 )
 
 def main():
-    world_size, local_rank, process_index = int(os.environ.get("WORLD_SIZE", 1)), int(
-        os.environ.get("LOCAL_RANK", 0)), int(os.environ.get("RANK", 0))
-
-
-    training_args: TrainingArgumentsCL
-    parser = HfArgumentParser((ModelArguments, TrainingArgumentsCL, DataArguments, PetlArguments, PromptArguments),
+    training_args: TrainingArgumentsAC
+    parser = HfArgumentParser((ModelArguments, TrainingArgumentsAC, DataArguments, PetlArguments, PromptArguments),
                               conflict_handler='resolve')
     model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,allow_extra_keys=True,)
     lora_args = lora_args.config
     prompt_args = prompt_args.config
 
+    if training_args.should_log:
+        # The default of training_args.log_level is passive, so we set log level at info here to have that default.
+        transformers.utils.logging.set_verbosity_info()
 
+    log_level = training_args.get_process_log_level()
+    logger.setLevel(log_level)
+    datasets.utils.logging.set_verbosity(log_level)
+    transformers.utils.logging.set_verbosity(log_level)
+    transformers.utils.logging.enable_default_handler()
+    transformers.utils.logging.enable_explicit_format()
 
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
     config_kwargs = {"torch_dtype": torch.float16}
@@ -60,7 +65,7 @@ def main():
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
 
-    if process_index == 0:
+    with training_args.main_process_first(desc="make_dataset_all"):
         dataHelper.make_dataset_all()
 
     is_bf16_supported = torch.cuda.is_bf16_supported()
@@ -76,7 +81,7 @@ def main():
         config.fp16 = True
         config.fp32 = False
 
-    if global_args[ "quantization_config" ] is not None and global_args[ "quantization_config" ].load_in_8bit:
+    if global_args["quantization_config"] is not None and global_args["quantization_config"].load_in_8bit:
         precision = "32"
         config.bf16 = False
         config.fp16 = False
@@ -91,10 +96,14 @@ def main():
         training_args.bf16 = False
 
 
+    deepspeed_config = get_deepspeed_config(precision)
+    if deepspeed_config:
+        training_args.deepspeed = deepspeed_config
+
     # Log on each process the small summary:
     logger.warning(
-        f"Process rank: {training_args.local_rank}"
-        + f"16-bits training: {training_args.fp16}"
+        f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}"
+        + f"distributed training: {training_args.parallel_mode.value == 'distributed'}, 16-bits training: {training_args.fp16}"
     )
     logger.info(f"Training/evaluation parameters {training_args}")
 
@@ -116,6 +125,7 @@ def main():
     # Set seed before initializing model.
     set_seed(training_args.seed)
 
+    world_size,local_rank,process_index = training_args.world_size,training_args.local_rank,training_args.process_index
 
     transformer_args = dict(config=config, model_args=model_args, training_args=training_args, lora_args=lora_args,
                             prompt_args=prompt_args,
@@ -128,8 +138,7 @@ def main():
     if transformer_args["quantization_config"] is None:
         transformer_args.pop("device_map")
 
-    with nullcontext():
-        pl_model = MyTransformer(**transformer_args)
+    pl_model = MyTransformer(**transformer_args)
 
     config.save_pretrained(training_args.output_dir)
 
@@ -154,7 +163,7 @@ def main():
 
 
     # Initialize our Trainer
-    trainer = TrainerCL(
+    trainer = TrainerAC(
         model=pl_model,
         args=training_args,
         train_dataset=train_datasets,

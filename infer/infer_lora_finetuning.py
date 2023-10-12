@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/3/9 15:29
 import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
+
 import torch
 from deep_training.data_helper import ModelArguments, DataArguments
 from transformers import HfArgumentParser, GenerationConfig
@@ -18,10 +21,11 @@ if __name__ == '__main__':
     tokenizer, _, _, _ = dataHelper.load_tokenizer_and_config(
         tokenizer_class_name=QWenTokenizer, config_class_name=QWenConfig)
 
-    ckpt_dir = './best_ckpt/last'
-    config = QWenConfig.from_pretrained(ckpt_dir)
-    
-    lora_args = PetlArguments.from_pretrained(ckpt_dir)
+    weight_dir = '../scripts/best_ckpt'
+    lora_weight_dir = os.path.join(weight_dir, "last")
+
+    config = QWenConfig.from_pretrained(weight_dir)
+    lora_args = PetlArguments.from_pretrained(lora_weight_dir)
 
     assert lora_args.inference_mode == True
 
@@ -37,14 +41,14 @@ if __name__ == '__main__':
                              # device_map = {"":0} # 第一块卡
                              )
     # 加载lora权重
-    pl_model.load_sft_weight(ckpt_dir)
+    pl_model.load_sft_weight(lora_weight_dir)
 
     pl_model.eval().half().cuda()
 
     enable_merge_weight = False
     if enable_merge_weight:
         # 合并lora 权重 保存
-        pl_model.save_sft_weight(os.path.join(ckpt_dir,'pytorch_model_merge.bin'),merge_lora_weight=True)
+        pl_model.save_sft_weight(os.path.join(lora_weight_dir,'pytorch_model_merge.bin'),merge_lora_weight=True)
 
     else:
         model = pl_model.get_llm_model()

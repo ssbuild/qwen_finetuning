@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/9/25 12:29
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 
 
 import logging
 import math
-import os
-import sys
 import datasets
 import torch
 import transformers
-from deep_training.trainer.ac.trainer import TrainerAC
+from deep_training.trainer.hf.trainer import TrainerHF
 from transformers import (
     HfArgumentParser,
     default_data_collator,
@@ -21,9 +22,9 @@ from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config, global_args
 from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments,QWenTokenizer,QWenConfig
-from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsAC
+from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsHF
 
-assert global_args["trainer_backend"] == "ac"
+assert global_args["trainer_backend"] == "hf"
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
 check_min_version("4.33.2")
@@ -38,8 +39,8 @@ logging.basicConfig(
 )
 
 def main():
-    training_args: TrainingArgumentsAC
-    parser = HfArgumentParser((ModelArguments, TrainingArgumentsAC, DataArguments, PetlArguments, PromptArguments),
+    training_args: TrainingArgumentsHF
+    parser = HfArgumentParser((ModelArguments, TrainingArgumentsHF, DataArguments, PetlArguments, PromptArguments),
                               conflict_handler='resolve')
     model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,allow_extra_keys=True,)
     lora_args = lora_args.config
@@ -61,6 +62,7 @@ def main():
     if global_args['config_merge']:
         config_kwargs.update(global_args['config_merge'])
 
+    config: QWenConfig
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
                                                                    config_class_name=QWenConfig,
                                                                    config_kwargs=config_kwargs)
@@ -87,6 +89,7 @@ def main():
         config.fp16 = False
         config.fp32 = True
 
+
     if str(precision) == '16':
         training_args.fp16 = True
     elif str(precision) == 'bf16':
@@ -94,7 +97,6 @@ def main():
     else:
         training_args.fp16 = False
         training_args.bf16 = False
-
 
     deepspeed_config = get_deepspeed_config(precision)
     if deepspeed_config:
@@ -163,7 +165,7 @@ def main():
 
 
     # Initialize our Trainer
-    trainer = TrainerAC(
+    trainer = TrainerHF(
         model=pl_model,
         args=training_args,
         train_dataset=train_datasets,
@@ -179,7 +181,14 @@ def main():
             checkpoint = training_args.resume_from_checkpoint
         elif last_checkpoint is not None:
             checkpoint = last_checkpoint
-        trainer.train(resume_from_checkpoint=checkpoint)
+        train_result = trainer.train(resume_from_checkpoint=checkpoint)
+        trainer.save_model()  # Saves the tokenizer too for easy upload
+
+        metrics = train_result.metrics
+        metrics["train_samples"] = len(train_datasets)
+        trainer.log_metrics("train", metrics)
+        trainer.save_metrics("train", metrics)
+        trainer.save_state()
 
 
 
