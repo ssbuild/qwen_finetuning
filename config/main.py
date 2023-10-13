@@ -119,7 +119,7 @@ def patch_args(train_info_args):
         train_info_args.pop('prompt', None)
 
     # 预处理
-    if 'rwkv' in (train_info_args['tokenizer_name'] or train_info_args['model_name_or_path']).lower():
+    if 'rwkv' in (train_info_args['model_type'] or train_info_args['model_name_or_path']).lower():
         train_info_args['use_fast_tokenizer'] = True
 
 
