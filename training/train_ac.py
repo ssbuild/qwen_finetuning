@@ -144,7 +144,10 @@ def main():
                             quantization_config=global_args["quantization_config"],
                             device_map={"": local_rank} if world_size > 1 else "auto",
                             torch_dtype=torch.float16,
-                            new_num_tokens=len(tokenizer),  # 可能扩充词
+                            # new_num_tokens=len(tokenizer),  # 可能扩充词
+                            auto_prepare_kbit_training=True,
+                            use_input_require_grads=False,
+                            use_gradient_checkpointing=False
                             )
 
     if transformer_args["quantization_config"] is None:
@@ -157,7 +160,7 @@ def main():
     # 加载sft权重
     # pl_model.load_sft_weight('./best_ckpt/best.pt',is_trainable=True)
 
-    # Finetune
+    # # Finetune
     # if config.bf16:
     #     pl_model = pl_model.bfloat16()
     # else:

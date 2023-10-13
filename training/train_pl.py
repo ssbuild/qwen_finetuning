@@ -112,6 +112,9 @@ def main():
                             device_map={"": trainer.local_rank} if trainer.world_size > 1 else "auto",
                             torch_dtype=torch.float16,
                             # new_num_tokens=len(tokenizer),  # 可能扩充词 , 还有一些隐藏token, 如果不需要可自行注释
+                            auto_prepare_kbit_training=True,
+                            use_input_require_grads=False,
+                            use_gradient_checkpointing=False
                             )
 
     if transformer_args["quantization_config"] is None:
@@ -125,7 +128,7 @@ def main():
     # pl_model.load_sft_weight('./best_ckpt/best.pt',is_trainable=True)
 
 
-    # Finetune
+    # # Finetune
     # if config.bf16:
     #     pl_model = pl_model.bfloat16()
     # else:
