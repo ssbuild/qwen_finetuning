@@ -38,17 +38,6 @@ def load_config():
 train_info_args = load_config()
 global_args = train_info_args.pop("global_args")
 train_model_config = MODELS_MAP[global_args["model_name"]]
-assert global_args["trainer_backend"] in ["pl","hf","cl","ac"]
-
-global_args["precision"] = str(global_args["precision"])
-
-if global_args["quantization_config"]:
-    #精度
-    if global_args["precision"] == "auto":
-        global_args["quantization_config"]["bnb_4bit_compute_dtype"] ="bfloat16" if torch.cuda.is_bf16_supported() else "float16"
-
-    global_args["quantization_config"] = BitsAndBytesConfig(**global_args["quantization_config"])
-
 
 
 def merge_from_env(global_args):
@@ -69,6 +58,17 @@ def merge_from_env(global_args):
 merge_from_env(global_args)
 
 def patch_args(train_info_args):
+    assert global_args["trainer_backend"] in ["pl", "hf", "cl", "ac"]
+    global_args["precision"] = str(global_args["precision"])
+
+    if global_args["quantization_config"]:
+        # 精度
+        if global_args["precision"] == "auto":
+            global_args["quantization_config"][
+                "bnb_4bit_compute_dtype"] = "bfloat16" if torch.cuda.is_bf16_supported() else "float16"
+
+        global_args["quantization_config"] = BitsAndBytesConfig(**global_args["quantization_config"])
+
     assert global_args["enable_lora"] + global_args["enable_ptv2"] <= 1 , ValueError("lora ptv2 cannot open at same time")
 
     #更新模型配置
