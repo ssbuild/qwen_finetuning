@@ -1,8 +1,11 @@
 # @Time    : 2023/1/22 16:22
 # @Author  : tk
 # @FileName: data_utils.py
+import glob
 import sys
 import os
+from functools import cache
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 import copy
@@ -124,6 +127,7 @@ class NN_DataHelper(DataHelper):
     # 读取文件
     def on_get_corpus(self, files: typing.List, mode: str):
         D = []
+        files = sum([glob.glob(file) for file in files], [])
         for file in files:
             with open(file, mode='r', encoding='utf-8', newline='\n') as f:
                 lines = f.readlines()
@@ -178,6 +182,29 @@ class NN_DataHelper(DataHelper):
         if data_args.do_test:
             self.make_dataset_with_args(data_args.test_file, mode='test',schema=schema)
 
+        # 记录缓存文件
+        with open(os.path.join(data_args.output_dir, 'intermediate_file_index.json'), mode='w',
+                  encoding='utf-8') as f:
+            f.write(json.dumps({
+                "train_files": self.train_files,
+                "eval_files": self.eval_files,
+                "test_files": self.test_files,
+            }, ensure_ascii=False))
+
+    @cache
+    def load_dataset_files(self):
+        data_args = self.data_args
+        if not data_args.convert_file:
+            return {
+                "train_files": self.train_files,
+                "eval_files": self.eval_files,
+                "test_files": self.test_files,
+            }
+        filename = os.path.join(data_args.output_dir, 'intermediate_file_index.json')
+        assert os.path.exists(filename), 'make you dataset firstly'
+        with open(filename, mode='r', encoding='utf-8') as f:
+            return json.loads(f.read())
+
 if __name__ == '__main__':
     if global_args["trainer_backend"] == "hf":
         parser = HfArgumentParser((ModelArguments, TrainingArgumentsHF, DataArguments, PetlArguments, PromptArguments),
@@ -200,10 +227,21 @@ if __name__ == '__main__':
     lora_args = lora_args.config
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
     tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,config_class_name=QWenConfig)
-    
 
     # 缓存数据集
-    # 检测是否存在 output/dataset_0-train.record ，不存在则制作数据集
+    print(f'to make dataset is overwrite_cache {data_args.overwrite_cache}')
     dataHelper.make_dataset_all()
 
+    print('make dataset complete!')
+    print('check data !')
+    dataset = dataHelper.load_sequential_sampler(dataHelper.load_dataset_files()["train_files"],
+                                                 with_load_memory=data_args.data_backend == 'record',
+                                                 batch_size=1,
+                                                 collate_fn=dataHelper.collate_fn)
+
+    print('total', len(dataset))
+    for i, d in enumerate(dataset):
+        print(d)
+        if i > 3:
+            break
 

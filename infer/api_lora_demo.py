@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/4/4 14:46
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
 
 from fastapi import FastAPI, Request
 import uvicorn, json, datetime
