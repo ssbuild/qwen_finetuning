@@ -1,6 +1,7 @@
 # @Time    : 2023/3/25 18:36
 # @Author  : tk
 import copy
+import json
 import random
 import typing
 from enum import Enum
@@ -91,8 +92,51 @@ def make_context(
 
 
 
+class ToolsBuilder:
+    TOOL_DESC = """{name_for_model}: Call this tool to interact with the {name_for_human} API. What is the {name_for_human} API useful for? {description_for_model} Parameters: {parameters} Format the arguments as a JSON object."""
 
-#对prompt 截断
+    REACT_PROMPT = """Answer the following questions as best you can. You have access to the following tools:
+
+{tool_descs}
+
+Use the following format:
+
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action: the action to take, should be one of [{tool_names}]
+Action Input: the input to the action
+Observation: the result of the action
+... (this Thought/Action/Action Input/Observation can be repeated zero or more times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
+
+Begin!
+
+Question: {query}"""
+
+    @classmethod
+    def build(cls,tools,query):
+        tools = json.loads(tools)
+        TOOL_DESC = ToolsBuilder.TOOL_DESC
+        REACT_PROMPT = ToolsBuilder.REACT_PROMPT
+        tool_descs = []
+        tool_names = []
+        for info in tools:
+            tool_descs.append(
+                TOOL_DESC.format(
+                    name_for_model=info['name_for_model'],
+                    name_for_human=info['name_for_human'],
+                    description_for_model=info['description_for_model'],
+                    parameters=json.dumps(
+                        info['parameters'], ensure_ascii=False),
+                )
+            )
+            tool_names.append(info['name_for_model'])
+        tool_descs = '\n\n'.join(tool_descs)
+        tool_names = ','.join(tool_names)
+
+        prompt = REACT_PROMPT.format(tool_descs=tool_descs, tool_names=tool_names, query=query)
+        return prompt
 
 class TokenIdsMaker:
 
@@ -114,12 +158,23 @@ class TokenIdsMaker:
         return d
 
     @classmethod
-    def tunction(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sup=True):
-        prefix,paragraph = data
-        sptoken = [ ]
+    def tunction(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sup=True):
+        sptoken = []
         ds = []
-        for sid,(q,a) in enumerate(paragraph):
-            _,a_ids = make_context(tokenizer=tokenizer,query=q,history=paragraph[:sid],
+        prefix = None
+        history = []
+        for sid,(role,tools,q,a) in enumerate(paragraph):
+            if role == 'system':
+                prefix = q
+                continue
+            if tools is not None:
+                q = ToolsBuilder.build(tools,query=q)
+
+            if role in ['observation','Observation']:
+                q = f'Observation: {q}'
+
+            history += [(q,a)]
+            _,a_ids = make_context(tokenizer=tokenizer,query=q,history=history[:-1],
                                    system = prefix or "You are a helpful assistant." ,
                                    max_window_size = 6144,
                                    chat_format = "chatml",)
@@ -141,15 +196,25 @@ class TokenIdsMaker:
 
 
     @classmethod
-    def slidding(cls, tokenizer: QWenTokenizer,config, data, max_seq_length, sliding_size = None,src_max_length=None,dst_max_length=None,sup=True):
+    def slidding(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sliding_size = None,src_max_length=None,dst_max_length=None,sup=True):
         if sliding_size is None:
             sliding_size = max_seq_length
-
-        sptoken = [ ]
-        prefix, paragraph = data
         ds = []
-        for sid, (q,a) in enumerate(paragraph):
-            _, a_ids = make_context(tokenizer=tokenizer, query=q, history=paragraph[:sid],
+        sptoken = []
+        prefix = None
+        history = []
+        for sid, (role, tools, q, a) in enumerate(paragraph):
+            if role == 'system':
+                prefix = q
+                continue
+            if tools is not None:
+                q = ToolsBuilder.build(tools, query=q)
+
+            if role in ['observation', 'Observation']:
+                q = f'Observation: {q}'
+
+            history += [(q, a)]
+            _, a_ids = make_context(tokenizer=tokenizer, query=q, history=history[:-1],
                                     system=prefix or "You are a helpful assistant.",
                                     max_window_size=6144,
                                     chat_format="chatml", )

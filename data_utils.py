@@ -89,39 +89,11 @@ class NN_DataHelper(DataHelper):
             if line_id < 10:
                 print(paragraph)
 
-            prefix = jd.get('p', '')
-            paragraph = [(preprocess(session['q']),
+            paragraph = [(session.get("role",'user'),session.get("tools",None),preprocess(session['q']),
                           preprocess('\n'.join(session['a'])) if isinstance(session['a'], list) else preprocess(
                               session['a']))
                          for session in paragraph]
-            D.append((prefix,paragraph))
-        return D
-
-    def _get_messages(self,lines):
-        D = []
-        for line_id, line in enumerate(lines):
-            jd = json.loads(line)
-            if not jd:
-                continue
-            conversations = jd['conversations']
-            if line_id < 10:
-                print(conversations)
-
-            paragraph = []
-            prefix = ''
-            pair = [None,None]
-            for m in conversations:
-                if m["from"] == 'user':
-                    pair[0] = preprocess(m["value"])
-                elif m["from"] == 'assistant':
-                    pair[1] = preprocess(m["value"])
-                elif m["from"] == 'system':
-                    prefix = preprocess(m["value"])
-                if pair[0] is not None and pair[1] is not None:
-                    paragraph.append(tuple(pair))
-                    pair[0],pair[1] = None,None
-
-            D.append((prefix,paragraph))
+            D.append(paragraph)
         return D
 
     # 读取文件
@@ -131,14 +103,7 @@ class NN_DataHelper(DataHelper):
         for file in files:
             with open(file, mode='r', encoding='utf-8', newline='\n') as f:
                 lines = f.readlines()
-
-            is_new = False
-            if len(lines) > 0:
-                is_new = 'conversations' in json.loads(lines[0])
-            if is_new:
-                D.extend(self._get_messages(lines))
-            else:
-                D.extend(self._get_paragraph(lines))
+            D.extend(self._get_paragraph(lines))
         return D
 
     def collate_fn(self,batch):

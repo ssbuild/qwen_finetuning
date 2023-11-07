@@ -38,65 +38,33 @@ pip install csrc/rotary
 
 
 ## data sample
-   open_data https://github.com/ssbuild/open_data
+   [open_data](https://github.com/ssbuild/open_data)
    [react_prompt](assets/react_prompt.md)
-
     
-单条数据示例
-
+数据示例
 ```text
-p prefix  optional
-q question optional
-a answer   must
+数据示例
+例子依次分别是 工具，对话，对话，对话
 
+数组组成 
+tools:  工具函数,可选字段(str)，为 json.dumps 序列化后的字符串，参考 data/make_data_example.py 
+role: 可选字段(str) 标志 q字段 角色, one of user system, observation ，system 标识是否为 system prompt , system prompt a 空 
+observation 配合tools，不是函数 ，tools键值不应存在。例子参考data/make_data_example.py 
+q: 问题
+a: 回答
+
+注意事项:
+a字段：对于普通对话，a即为回答。
+细节可以参考 assets/react_prompt.md
 ```
 
 ```json
- {
-    "id": 0, 
-    "p": "我是qwen训练的模型",
-    "paragraph": [
-        {
-           "q": "你好",
-           "a": "我是机器人，有什么可以帮助你的？"
-        },
-         {
-             "q": "从南京到上海的路线",
-             "a":  "你好，南京到上海的路线如下：1. 南京到上海，可以乘坐南京地铁1号线，在南京站乘坐轨道交通1号线。2. 南京到浦东机场，可以搭乘上海地铁1号，在陆家嘴站乘坐地铁1线，在浦东国际机场站乘坐机场快线，前往上海浦东国际机场。3. 上海到南京，可以换乘上海地铁2号线，从南京站换乘地铁2线，再从南京南站换乘地铁1路，然后到达上海站"
-         }
-     ]
- }
-
+{"id": 1, "paragraph": [{"role": "system", "q": "Answer the following questions as best you can. You have access to the following tools:", "tools": " \n[\n    {\n        'name_for_human':\n        '夸克搜索',\n        'name_for_model':\n        'quark_search',\n        'description_for_model':\n        '夸克搜索是一个通用搜索引擎，可用于访问互联网、查询百科知识、了解时事新闻等。',\n        'parameters': [{\n            'name': 'search_query',\n            'description': '搜索关键词或短语',\n            'required': True,\n            'schema': {\n                'type': 'string'\n            },\n        }],\n    },\n    {\n        'name_for_human':\n        '通义万相',\n        'name_for_model':\n        'image_gen',\n        'description_for_model':\n        '通义万相是一个AI绘画（图像生成）服务，输入文本描述，返回根据文本作画得到的图片的URL',\n        'parameters': [{\n            'name': 'query',\n            'description': '中文关键词，描述了希望图像具有什么内容',\n            'required': True,\n            'schema': {\n                'type': 'string'\n            },\n        }],\n    },\n]\n", "a": ""}, {"role": "user", "q": "现在给我画个五彩斑斓的黑", "a": "\nThought: 我应该使用通义万相API来生成一张五彩斑斓的黑的图片。\nAction: image_gen\nAction Input: {\"query\": \"五彩斑斓的黑\"}\n            "}, {"role": "observation", "q": "\n{\"status_code\": 200, \"request_id\": \"3d894da2-0e26-9b7c-bd90-102e5250ae03\", \"code\": null, \"message\": \"\", \"output\": {\"task_id\": \"2befaa09-a8b3-4740-ada9-4d00c2758b05\", \"task_status\": \"SUCCEEDED\", \"results\": [{\"url\": \"https://dashscope-result-sh.oss-cn-shanghai.aliyuncs.com/1e5e2015/20230801/1509/6b26bb83-469e-4c70-bff4-a9edd1e584f3-1.png\"}], \"task_metrics\": {\"TOTAL\": 1, \"SUCCEEDED\": 1, \"FAILED\": 0}}, \"usage\": {\"image_count\": 1}}\n", "a": "\nThought: 我已经成功使用通义万相API生成了一张五彩斑斓的黑的图片。\nFinal Answer: 我已经成功使用通义万相API生成了一张五彩斑斓的黑的图片https://dashscope-result-sh.oss-cn-shanghai.aliyuncs.com/1e5e2015/20230801/1509/6b26bb83-469e-4c70-bff4-a9edd1e584f3-1.png。\n            "}]}
+{"id": 2, "paragraph": [{"q": "从南京到上海的路线", "a": "你好，南京到上海的路线如下：\n1. 南京到上海，可以乘坐南京地铁1号线，在南京站乘坐轨道交通1号线。\n2. 南京到浦东机场，可以搭乘上海地铁1号，在陆家嘴站乘坐地铁1线，在浦东国际机场站乘坐机场快线，前往上海浦东国际机场。\n3. 上海到南京，可以换乘上海地铁2号线，从南京站换乘地铁2线，再从南京南站换乘地铁1路，然后到达上海站"}]}
+{"id": 3, "paragraph": [{"q": "写一个诗歌，关于冬天", "a": "冬夜寂静冷，\n云在天边飘，\n冰封白雪上， \n寒冷像一场雪。\n \n雪花融化成冰，\n像那雪花飘洒，\n在寒冷的冬天，\n感受春天的喜悦。\n 冬日里，\n风雪渐消，\n一片寂静，\n把快乐和温暖带回家。"}]}
+{"id": 4, "paragraph": [{"q": "晚上睡不着应该怎么办", "a": "晚上睡不着可能会让你感到焦虑或不舒服,但以下是一些可以帮助你入睡的方法:\n\n1. 制定规律的睡眠时间表:保持规律的睡眠时间表可以帮助你建立健康的睡眠习惯,使你更容易入睡。尽量在每天的相同时间上床,并在同一时间起床。\n2. 创造一个舒适的睡眠环境:确保睡眠环境舒适,安静,黑暗且温度适宜。可以使用舒适的床上用品,并保持房间通风。\n3. 放松身心:在睡前做些放松的活动,例如泡个热水澡,听些轻柔的音乐,阅读一些有趣的书籍等,有助于缓解紧张和焦虑,使你更容易入睡。\n4. 避免饮用含有咖啡因的饮料:咖啡因是一种刺激性物质,会影响你的睡眠质量。尽量避免在睡前饮用含有咖啡因的饮料,例如咖啡,茶和可乐。\n5. 避免在床上做与睡眠无关的事情:在床上做些与睡眠无关的事情,例如看电影,玩游戏或工作等,可能会干扰你的睡眠。\n6. 尝试呼吸技巧:深呼吸是一种放松技巧,可以帮助你缓解紧张和焦虑,使你更容易入睡。试着慢慢吸气,保持几秒钟,然后缓慢呼气。\n\n如果这些方法无法帮助你入睡,你可以考虑咨询医生或睡眠专家,寻求进一步的建议。"}]}
 ```
-或者
 
-```json
- {
-    "id": 0,
-    "conversations": [
-      {
-        "from": "system",
-        "value": "我是qwen训练的模型"
-      },
-      {
-        "from": "user",
-        "value": "你好"
-      },
-      {
-        "from": "assistant",
-        "value": "我是机器人，有什么可以帮助你的？"
-      },
-      {
-        "from": "user",
-        "value": "从南京到上海的路线"
-      },
-      {
-        "from": "assistant",
-        "value": "你好，南京到上海的路线如下：1. 南京到上海，可以乘坐南京地铁1号线，在南京站乘坐轨道交通1号线。2. 南京到浦东机场，可以搭乘上海地铁1号，在陆家嘴站乘坐地铁1线，在浦东国际机场站乘坐机场快线，前往上海浦东国际机场。3. 上海到南京，可以换乘上海地铁2号线，从南京站换乘地铁2线，再从南京南站换乘地铁1路，然后到达上海站"
-      }
-     ]
- }
-```
 
 
 
