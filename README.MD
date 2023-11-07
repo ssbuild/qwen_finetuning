@@ -111,6 +111,13 @@ a字段：对于普通对话，a即为回答。
         bash train_ptv2.sh -m train
 ```
 
+## aigc-serving
+
+部署qwen之后 ， 可测试工具函数
+[quad_calculator.py](https://github.com/ssbuild/aigc_serving/blob/main/tests/quad_calculator.py)
+
+
+
 ## 训练参数
 [训练参数](args.MD)
 
@@ -120,7 +127,7 @@ a字段：对于普通对话，a即为回答。
 ## 友情链接
 
 - [pytorch-task-example](https://github.com/ssbuild/pytorch-task-example)
-- [chatmoss_finetuning](https://github.com/ssbuild/chatmoss_finetuning)
+- [moss_finetuning](https://github.com/ssbuild/chatmoss_finetuning)
 - [chatglm_finetuning](https://github.com/ssbuild/chatglm_finetuning)
 - [chatglm2_finetuning](https://github.com/ssbuild/chatglm2_finetuning)
 - [chatglm3_finetuning](https://github.com/ssbuild/chatglm3_finetuning)
@@ -131,8 +138,12 @@ a字段：对于普通对话，a即为回答。
 - [t5_rlhf](https://github.com/ssbuild/t5_rlhf)
 - [rwkv_finetuning](https://github.com/ssbuild/rwkv_finetuning)
 - [baichuan_finetuning](https://github.com/ssbuild/baichuan_finetuning)
+- [xverse_finetuning](https://github.com/ssbuild/xverse_finetuning)
 - [internlm_finetuning](https://github.com/ssbuild/internlm_finetuning)
 - [qwen_finetuning](https://github.com/ssbuild/qwen_finetuning)
+- [skywork_finetuning](https://github.com/ssbuild/skywork_finetuning)
+- [bluelm_finetuning](https://github.com/ssbuild/bluelm_finetuning)
+- [yi_finetuning](https://github.com/ssbuild/yi_finetuning)
 ## 
     纯粹而干净的代码
 
