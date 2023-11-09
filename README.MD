@@ -38,7 +38,7 @@ pip install csrc/rotary
 
 
 ## data sample
-   [open_data](https://github.com/ssbuild/open_data)
+   [open_data 不定时开放新数据集](https://github.com/ssbuild/open_data)
    [react_prompt](assets/react_prompt.md)
     
 数据示例
