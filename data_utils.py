@@ -123,11 +123,12 @@ class NN_DataHelper(DataHelper):
                     a = ""
                     sub.append((role, q, a))
                     continue
-                assert role in m["from"] in ['user', 'observation', 'function']
+                assert role in ['user', 'observation', 'function']
                 m = conversations[cid]
                 cid += 1
                 assert m["from"] == "assistant"
                 a = preprocess(m["value"])
+                assert len(a), ValueError('answer cannot empty')
                 sub.append((role, q, a))
             D.append(sub)
         return D

@@ -21,7 +21,7 @@
 ```text
 
 # flash-attention对显卡算例要求算力7.5 以上 ， 下面可选安装 ，如果卡不支持可以不安装。
-git clone -b v1.0.8 https://github.com/Dao-AILab/flash-attention
+git clone -b https://github.com/Dao-AILab/flash-attention
 cd flash-attention && pip install .
 pip install csrc/layer_norm
 pip install csrc/rotary
