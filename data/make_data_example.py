@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/2/24 12:50
 
-
 import json
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 
-x0 = {
-    "id": 0, "paragraph": [
+# 导入ToolsBuilder ， 从兼容性考虑，还是从数据源直接构建，
+from data_tools import ToolsBuilder
+
+x0 =  [
         {
             "role": "system",
             "q": "You are a helpful assistant.",
@@ -64,11 +68,10 @@ Thought: 我已经成功使用通义万相API生成了一张五彩斑斓的黑�
 Final Answer: 我已经成功使用通义万相API生成了一张五彩斑斓的黑的图片https://dashscope-result-sh.oss-cn-shanghai.aliyuncs.com/1e5e2015/20230801/1509/6b26bb83-469e-4c70-bff4-a9edd1e584f3-1.png。
             '''
         }
-    ]
-}
+]
 
-x1 = {
-    "id": 0, "paragraph": [
+
+x1 =  [
     {
         "role": "system",
         "q": "You are a helpful assistant.",
@@ -84,9 +87,9 @@ x1 = {
         ])
     }
     ]
-}
 
-x2 = {"id": 0, "paragraph": [
+
+x2 = [
     {
         "role": "system",
         "q": "You are a helpful assistant.",
@@ -108,10 +111,10 @@ x2 = {"id": 0, "paragraph": [
              "把快乐和温暖带回家。"
         ])
     }
-    ]
-}
+]
 
-x3 = {"id": 0, "paragraph": [
+
+x3 = [
     {
         "role": "system",
         "q": "You are a helpful assistant.",
@@ -132,17 +135,65 @@ x3 = {"id": 0, "paragraph": [
             "如果这些方法无法帮助你入睡,你可以考虑咨询医生或睡眠专家,寻求进一步的建议。"
         ])
     }
-    ]
-}
+]
+
 
 
 
 x = [x0,x1,x2,x3]
 
-with open('./finetune_train_examples.json',mode='w',encoding='utf-8',newline='\n') as f:
+# 重新构建数据集
+for paragraph in x:
+    for node in paragraph:
+        role = node.get("role", "user")
+        tools = node.pop("tools",None)
+        q = node["q"]
+        if tools is not None:
+            q = ToolsBuilder.build(tools,query=q)
+            node["q"] = q
+        if role in ["observation","function"]:
+            node["q"] = f'Observation: {q}'
+
+
+with open('./finetune_train_paragraph.json',mode='w',encoding='utf-8',newline='\n') as f:
     index = 0
-    for i in range(100):
+    for i in range(50):
         for j in range(len(x)):
             index += 1
-            x[j]['id'] = index
-            f.write(json.dumps(x[j],ensure_ascii=False) + '\n' )
+
+            conversations = {
+                "id": index,
+                "paragraph": x[j]
+            }
+            f.write(json.dumps(conversations,ensure_ascii=False) + '\n' )
+
+
+with open('./finetune_train_conversations.json',mode='w',encoding='utf-8',newline='\n') as f:
+    index = 0
+    for i in range(50):
+        for j in range(len(x)):
+            index += 1
+
+            conversation = []
+            for item in x[j]:
+                role = item.get("role","user")
+                if role == "system":
+                    conversation.append( {
+                        "from":  item.get("role","user"),
+                        "value": item["q"]
+                    })
+                else:
+                    conversation.append({
+                        "from": item.get("role", "user"),
+                        "value": item["q"]
+                    })
+                    conversation.append({
+                        "from": "assistant",
+                        "value": item["a"]
+                    })
+
+            conversations = {
+                "id": index,
+                "conversations": conversation
+            }
+            f.write(json.dumps(conversations,ensure_ascii=False) + '\n' )

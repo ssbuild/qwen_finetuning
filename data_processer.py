@@ -92,52 +92,6 @@ def make_context(
 
 
 
-class ToolsBuilder:
-    TOOL_DESC = """{name_for_model}: Call this tool to interact with the {name_for_human} API. What is the {name_for_human} API useful for? {description_for_model} Parameters: {parameters} Format the arguments as a JSON object."""
-
-    REACT_PROMPT = """Answer the following questions as best you can. You have access to the following tools:
-
-{tool_descs}
-
-Use the following format:
-
-Question: the input question you must answer
-Thought: you should always think about what to do
-Action: the action to take, should be one of [{tool_names}]
-Action Input: the input to the action
-Observation: the result of the action
-... (this Thought/Action/Action Input/Observation can be repeated zero or more times)
-Thought: I now know the final answer
-Final Answer: the final answer to the original input question
-
-Begin!
-
-Question: {query}"""
-
-    @classmethod
-    def build(cls,tools,query):
-        tools = json.loads(tools)
-        TOOL_DESC = ToolsBuilder.TOOL_DESC
-        REACT_PROMPT = ToolsBuilder.REACT_PROMPT
-        tool_descs = []
-        tool_names = []
-        for info in tools:
-            tool_descs.append(
-                TOOL_DESC.format(
-                    name_for_model=info['name_for_model'],
-                    name_for_human=info['name_for_human'],
-                    description_for_model=info['description_for_model'],
-                    parameters=json.dumps(
-                        info['parameters'], ensure_ascii=False),
-                )
-            )
-            tool_names.append(info['name_for_model'])
-        tool_descs = '\n\n'.join(tool_descs)
-        tool_names = ','.join(tool_names)
-
-        prompt = REACT_PROMPT.format(tool_descs=tool_descs, tool_names=tool_names, query=query)
-        return prompt
-
 class TokenIdsMaker:
 
     @classmethod
@@ -163,15 +117,16 @@ class TokenIdsMaker:
         ds = []
         prefix = None
         history = []
-        for sid,(role,tools,q,a) in enumerate(paragraph):
+        for sid,(role,q,a) in enumerate(paragraph):
             if role == 'system':
                 prefix = q
                 continue
-            if tools is not None:
-                q = ToolsBuilder.build(tools,query=q)
-
-            if role in ['observation','Observation']:
-                q = f'Observation: {q}'
+            # 从兼容性考虑，预处理从数据源构建
+            # if tools is not None:
+            #     q = ToolsBuilder.build(tools,query=q)
+            #
+            # if role in ['observation','Observation']:
+            #     q = f'Observation: {q}'
 
             history += [(q,a)]
             _,a_ids = make_context(tokenizer=tokenizer,query=q,history=history[:-1],
@@ -203,15 +158,17 @@ class TokenIdsMaker:
         sptoken = []
         prefix = None
         history = []
-        for sid, (role, tools, q, a) in enumerate(paragraph):
+        for sid, (role, q, a) in enumerate(paragraph):
             if role == 'system':
                 prefix = q
                 continue
-            if tools is not None:
-                q = ToolsBuilder.build(tools, query=q)
 
-            if role in ['observation', 'Observation']:
-                q = f'Observation: {q}'
+            # 从兼容性考虑，预处理从数据源构建
+            # if tools is not None:
+            #     q = ToolsBuilder.build(tools, query=q)
+
+            # if role in ['observation', 'Observation']:
+            #     q = f'Observation: {q}'
 
             history += [(q, a)]
             _, a_ids = make_context(tokenizer=tokenizer, query=q, history=history[:-1],
