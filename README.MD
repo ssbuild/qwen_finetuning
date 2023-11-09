@@ -38,15 +38,14 @@ pip install csrc/rotary
 
 
 ## data sample
-   [open_data 不定时开放新数据集](https://github.com/ssbuild/open_data)
-   [react_prompt](assets/react_prompt.md)
-    
-数据示例
+- [open_data 不定时开放新数据集](https://github.com/ssbuild/open_data)
+- [react_prompt](assets/react_prompt.md)
+
 ```text
 数据示例
 例子依次分别是 工具，对话，对话，对话
-
-数组组成 data/make_data_example.py 
+数据构建sample 参考 data/make_data_example.py
+数组组成  
 role: 可选字段(str) 标志 q字段 角色, one of user system, observation ，system 标识是否为 system prompt , system prompt a 空 
 q: 问题
 a: 回答
