@@ -144,7 +144,6 @@ def main():
                             torch_dtype=torch.float16,
                             # new_num_tokens=len(tokenizer),  # 可能扩充词
                             auto_prepare_kbit_training=True,
-                            use_input_require_grads=False,
                             use_gradient_checkpointing=False
                             )
 

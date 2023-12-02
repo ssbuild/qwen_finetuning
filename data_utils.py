@@ -50,6 +50,47 @@ def postprocess(text):
 
 class NN_DataHelper(DataHelper):
     index = 1
+
+    def load_tokenizer_and_config(self, *args, tokenizer_kwargs=None, config_kwargs=None, **kwargs):
+        if config_kwargs is None:
+            config_kwargs = {}
+
+        if tokenizer_kwargs is None:
+            tokenizer_kwargs = {}
+
+        model_args = self.model_args
+        base_path = model_args.config_name or model_args.model_name_or_path
+        if os.path.isfile(base_path):
+            base_path = os.path.dirname(base_path)
+
+        # last_name = base_path.rsplit('/')[-1].lower()
+        # if "yi" in last_name:
+        gen_file = os.path.join(base_path, "generation_config.json")
+        if os.path.exists(gen_file):
+            with open(gen_file, mode='r', encoding='utf-8') as f:
+                gen_args = json.loads(f.read())
+                gen_args_new = {}
+                if "bos_token_id" in gen_args:
+                    gen_args_new["bos_token_id"] = gen_args["bos_token_id"]
+
+                if "pad_token_id" in gen_args:
+                    gen_args_new["pad_token_id"] = gen_args["pad_token_id"]
+
+                if "eos_token_id" in gen_args:
+                    gen_args_new["eos_token_id"] = gen_args["eos_token_id"]
+
+                config_kwargs.update(gen_args_new)
+
+        # if 'trust_remote_code' not in config_kwargs:
+        #     config_kwargs.update({"trust_remote_code": True, "local_files_only": True})
+        # if 'trust_remote_code' not in tokenizer_kwargs:
+        #     tokenizer_kwargs.update({"trust_remote_code": True, "local_files_only": True})
+
+        return super().load_tokenizer_and_config(*args, tokenizer_kwargs=tokenizer_kwargs, config_kwargs=config_kwargs,
+                                                **kwargs)
+
+
+
     def on_data_ready(self):
         self.index = -1
 
@@ -168,7 +209,7 @@ class NN_DataHelper(DataHelper):
         for i,seqlen in enumerate(seqlens):
             attention_mask[i,:seqlen] = 1
         o['input_ids'] = input_ids.long()
-        o['attention_mask'] = attention_mask
+        o['attention_mask'] = attention_mask.float()
         o['labels'] = o['labels'][:, :max_len].long()
         return o
 

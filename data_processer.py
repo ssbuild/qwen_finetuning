@@ -3,8 +3,9 @@
 import copy
 import json
 import random
-import typing
 from enum import Enum
+from typing import Tuple, List
+
 import numpy as np
 from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer
 # from aigc_zoo.model_zoo.qwen.qwen_generation_utils import make_context
@@ -16,11 +17,10 @@ class DataStrategy(Enum):
     siding = 2
 
 
-
 def make_context(
     tokenizer: PreTrainedTokenizer,
     query: str,
-    history: typing.List[typing.Tuple[str, str]] = None,
+    history: List[Tuple[str, str]] = None,
     system: str = "",
     max_window_size: int = 6144,
     chat_format: str = "chatml",
@@ -36,8 +36,8 @@ def make_context(
 
         def _tokenize_str(role, content):
             return f"{role}\n{content}", tokenizer.encode(
-                role
-            ) + nl_tokens + tokenizer.encode(content)
+                role, allowed_special=set()
+            ) + nl_tokens + tokenizer.encode(content, allowed_special=set())
 
         system_text, system_tokens_part = _tokenize_str("system", system)
         system_tokens = im_start_tokens + system_tokens_part + im_end_tokens

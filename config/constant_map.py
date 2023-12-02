@@ -17,26 +17,64 @@ __all__ = [
 ]
 
 MODELS_MAP = {
-    'Qwen-7B': {
+
+    'Qwen-1_8B-Chat': {
         'model_type': 'qwen',
-        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-7B',
-        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B/',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B-Chat',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B-Chat',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B-Chat',
     },
+
+    'Qwen-1_8B': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-1_8B',
+    },
+
 
     'Qwen-7B-Chat': {
         'model_type': 'qwen',
         'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat',
-        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat/',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B-Chat',
+    },
+    
+    'Qwen-7B': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-7B',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-7B',
     },
 
-    'qwen-7b-chat-int4': {
+    'Qwen-14B-Chat': {
         'model_type': 'qwen',
-        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4',
-        'config_name': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/qwen-7b-chat-int4/',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-14B-Chat',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-14B-Chat',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-14B-Chat',
     },
+    
+    'Qwen-14B': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-14B',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-14',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-14B',
+    },
+
+    'Qwen-72B-Chat': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-72B-Chat',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-72B-Chat',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-72B-Chat',
+    },
+
+    'Qwen-72B': {
+        'model_type': 'qwen',
+        'model_name_or_path': '/data/nlp/pre_models/torch/qwen/Qwen-72B',
+        'config_name': '/data/nlp/pre_models/torch/qwen/Qwen-72B',
+        'tokenizer_name': '/data/nlp/pre_models/torch/qwen/Qwen-72B',
+    },
+
 
 }
 

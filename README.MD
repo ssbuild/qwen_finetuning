@@ -2,6 +2,7 @@
 - [deep_training](https://github.com/ssbuild/deep_training)
 
 ```text
+    12-02 update qwen model 1.8b 7b 12b 72b 
     10-09 support accelerator trainer
     10-07 support colossalai trainer
     09-26 support transformers trainer
@@ -29,12 +30,14 @@ pip install csrc/rotary
 
 
 ## weight
-
+ - [Qwen-1_8B](https://huggingface.co/Qwen/Qwen-1_8B)
+ - [Qwen-1_8B-Chat](https://huggingface.co/Qwen/Qwen-1_8B-Chat)
  - [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
  - [Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat)
  - [Qwen-14B](https://huggingface.co/Qwen/Qwen-14B)
  - [Qwen-14B-Chat](https://huggingface.co/Qwen/Qwen-14B-Chat)
-
+ - [Qwen-72B](https://huggingface.co/Qwen/Qwen-72B)
+ - [Qwen-72B-Chat](https://huggingface.co/Qwen/Qwen-72B-Chat)
 
 
 ## data sample
