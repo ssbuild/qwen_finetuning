@@ -209,7 +209,7 @@ class NN_DataHelper(DataHelper):
         for i,seqlen in enumerate(seqlens):
             attention_mask[i,:seqlen] = 1
         o['input_ids'] = input_ids.long()
-        o['attention_mask'] = attention_mask.float()
+        o['attention_mask'] = attention_mask
         o['labels'] = o['labels'][:, :max_len].long()
         return o
 
