@@ -21,7 +21,7 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
 from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config, global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments,QWenTokenizer,QWenConfig
+from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments,QWenTokenizer,QWenConfig,setup_model_profile
 from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsCL
 
 assert global_args["trainer_backend"] == "cl"
@@ -40,6 +40,8 @@ logging.basicConfig(
 )
 
 def main():
+    setup_model_profile()
+
     world_size, local_rank, process_index = int(os.environ.get("WORLD_SIZE", 1)), int(
         os.environ.get("LOCAL_RANK", 0)), int(os.environ.get("RANK", 0))
 
