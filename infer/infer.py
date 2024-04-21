@@ -6,23 +6,21 @@ sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
 
 import torch
 from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
-from transformers import HfArgumentParser, BitsAndBytesConfig, GenerationConfig
-from data_utils import train_info_args, NN_DataHelper
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,PetlArguments,setup_model_profile, QWenConfig
+from transformers import HfArgumentParser, BitsAndBytesConfig, GenerationConfig, PreTrainedTokenizer
+from data_utils import config_args, NN_DataHelper
+from deep_training.zoo.model_zoo.llm.llm_model import MyTransformer,PetlArguments
+from data_processer import make_context
 
 
 
 if __name__ == '__main__':
-    train_info_args['seed'] = None
+    config_args['seed'] = None
     parser = HfArgumentParser((ModelArguments,))
-    (model_args,) = parser.parse_dict(train_info_args, allow_extra_keys=True)
-
-    setup_model_profile()
+    (model_args,) = parser.parse_dict(config_args, allow_extra_keys=True)
 
     dataHelper = NN_DataHelper(model_args)
-    tokenizer: QWenTokenizer
-    tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config(
-        tokenizer_class_name=QWenTokenizer, config_class_name=QWenConfig)
+    tokenizer: PreTrainedTokenizer
+    tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config()
 
     # quantization configuration for NF4 (4 bits)
     quantization_config = BitsAndBytesConfig(
@@ -50,15 +48,9 @@ if __name__ == '__main__':
 
     model = model.eval()
     model.requires_grad_(False)
-    if not model.quantized:
-        # 按需修改，目前只支持 4/8 bit 量化 ， 可以保存量化模型
-        model.half().quantize(4).cuda()
-        # 保存量化权重
-        # model.save_pretrained('qwen-chat-7b-int4',max_shard_size="4GB")
-        # exit(0)
-    else:
-        # 已经量化
-        model.half().cuda()
+
+    model.half().cuda()
+    model = model.eval()
 
     text_list = [
         "写一个诗歌，关于冬天",
@@ -66,9 +58,9 @@ if __name__ == '__main__':
     ]
     generation_config = GenerationConfig(**{
         "chat_format": "chatml",
-        "eos_token_id": 151643,
+        "eos_token_id": tokenizer.eos_token_id,
         "max_new_tokens": 512,
-        "pad_token_id": 151643,
+        "pad_token_id": tokenizer.eos_token_id,
         #"stop_words_ids": [[151643]],
         "do_sample": True,
         "top_k": 0,
@@ -76,7 +68,13 @@ if __name__ == '__main__':
     })
 
     for input in text_list:
-        response, history = model.chat(tokenizer, input, history=[],generation_config=generation_config )
+        _, input_ids = make_context(tokenizer, input)
+        input_ids = torch.tensor(input_ids)
+        input_ids = input_ids.unsqueeze(0)
+        response = model.generate(inputs=input_ids.cuda(), )
+        outputs = response.tolist()[0][len(input_ids[0]):]
+        response = tokenizer.decode(outputs, skip_special_tokens=True)
+
         print("input", input)
         print("response", response)
 

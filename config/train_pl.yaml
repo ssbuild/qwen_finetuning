@@ -1,0 +1,68 @@
+includes: [global.yaml, petl.yaml]
+
+devices: 1
+data_backend: parquet
+convert_onnx: false
+do_train: true
+train_file:
+- ../data/*.json
+
+max_epochs: 20
+max_steps: -1
+
+ # *** optimizer
+# lamb,adamw_hf,adamw,adamw_torch,adamw_torch_fused,adamw_torch_xla,adamw_apex_fused,
+# adafactor,adamw_anyprecision,sgd,adagrad,adamw_bnb_8bit,adamw_8bit,lion,lion_8bit,lion_32bit,
+# paged_adamw_32bit,paged_adamw_8bit,paged_lion_32bit,paged_lion_8bit,
+# lamb_fused_dp adagrad_cpu_dp adam_cpu_dp adam_fused_dp
+
+# *** scheduler
+# linear,WarmupCosine,CAWR,CAL,Step,ReduceLROnPlateau, cosine,cosine_with_restarts,polynomial,
+# constant,constant_with_warmup,inverse_sqrt,reduce_lr_on_plateau
+
+# 'scheduler_type': 'linear',# one of [linear,WarmupCosine,CAWR,CAL,Step,ReduceLROnPlateau
+# 'scheduler': None,
+# 切换scheduler类型
+# 'scheduler_type': 'WarmupCosine',
+# 'scheduler': None,
+
+# 'scheduler_type': 'ReduceLROnPlateau',
+# 'scheduler': None,
+
+# 'scheduler_type': 'Step',
+# 'scheduler':{ 'decay_rate': 0.999,'decay_steps': 100,'verbose': True},
+
+# 'scheduler_type': 'CAWR',
+# 'scheduler':{'T_mult': 1, 'rewarm_epoch_num': 2, 'verbose': True},
+
+# 'scheduler_type': 'CAL',
+# 'scheduler': {'rewarm_epoch_num': 2,'verbose': True},
+
+optimizer: lion
+scheduler_type: CAWR
+scheduler:
+  T_mult: 1
+  rewarm_epoch_num: 0.5
+  verbose: false
+optimizer_betas: !!python/tuple
+- 0.9
+- 0.999
+train_batch_size: 2
+eval_batch_size: 2
+test_batch_size: 2
+learning_rate: 2.0e-05
+adam_epsilon: 1.0e-08
+gradient_accumulation_steps: 1
+max_grad_norm: 1.0
+weight_decay: 0
+warmup_steps: 0
+output_dir: ./outputs_pl
+max_seq_length: 512
+do_lower_case: null
+
+# 预测最大长度, 保留字段
+max_target_length: 100
+use_fast_tokenizer: false
+dataloader_drop_last: true
+dataloader_pin_memory: true
+dataloader_num_workers: 0

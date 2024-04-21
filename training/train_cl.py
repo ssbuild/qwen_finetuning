@@ -20,8 +20,9 @@ from transformers import (
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version, send_example_telemetry
 from transformers.utils.versions import require_version
-from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config, global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments,QWenTokenizer,QWenConfig,setup_model_profile
+from data_utils import NN_DataHelper, config_args, get_deepspeed_config, global_args
+from transformers import HfArgumentParser, PreTrainedTokenizer,PretrainedConfig
+from deep_training.zoo.model_zoo.llm.llm_model import MyTransformer, PetlArguments, LoraConfig, PromptArguments
 from deep_training.data_helper import ModelArguments, DataArguments,TrainingArgumentsCL
 
 assert global_args["trainer_backend"] == "cl"
@@ -40,7 +41,6 @@ logging.basicConfig(
 )
 
 def main():
-    setup_model_profile()
 
     world_size, local_rank, process_index = int(os.environ.get("WORLD_SIZE", 1)), int(
         os.environ.get("LOCAL_RANK", 0)), int(os.environ.get("RANK", 0))
@@ -49,7 +49,7 @@ def main():
     training_args: TrainingArgumentsCL
     parser = HfArgumentParser((ModelArguments, TrainingArgumentsCL, DataArguments, PetlArguments, PromptArguments),
                               conflict_handler='resolve')
-    model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,allow_extra_keys=True,)
+    model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(config_args,allow_extra_keys=True,)
     lora_args = lora_args.config
     prompt_args = prompt_args.config
 
@@ -60,9 +60,7 @@ def main():
     if global_args['config_merge']:
         config_kwargs.update(global_args['config_merge'])
 
-    tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
-                                                                   config_class_name=QWenConfig,
-                                                                   config_kwargs=config_kwargs)
+    tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(config_kwargs=config_kwargs)
 
     if process_index == 0:
         dataHelper.make_dataset_all()

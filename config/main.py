@@ -8,36 +8,35 @@ import yaml
 from transformers import BitsAndBytesConfig
 from transformers.utils import strtobool
 
-from config.colossalai_config import colossalai_strategy
-from config.constant_map import *
+from deep_training.zoo.constants.define import (TRANSFORMERS_MODELS_TO_LORA_TARGET_MODULES_MAPPING,
+                                       TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING,
+                                       TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING,
+                                       TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING)
+
+# 按需修改
+# TRANSFORMERS_MODELS_TO_LORA_TARGET_MODULES_MAPPING
+# TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING
+# TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING
+# TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING
+
+
+TRANSFORMERS_MODELS_TO_LORA_TARGET_MODULES_MAPPING['qwen'] = ['q_proj','k_proj','v_proj']
+TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING['qwen'] = ['q_proj','k_proj','v_proj']
+TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING['qwen'] = ['q_proj','k_proj','v_proj']
+
+from deep_training.utils.wrapper import load_yaml
 
 
 
 # 加载
-
 __CUR_PATH__ = os.path.abspath(os.path.dirname(__file__))
-TRAIN_CONFIG_CACHE = os.path.join(__CUR_PATH__,"config_path_cache.json")
 
 
-def load_config():
-    if "train_config" not in os.environ:
-        if not os.path.exists(TRAIN_CONFIG_CACHE):
-            raise ValueError("train_config is not set environ")
-        with open(TRAIN_CONFIG_CACHE, mode='r', encoding='utf-8') as __f:
-            __config_path = json.load(__f)
-    else:
-        __config_path = os.path.abspath(os.environ.get("train_config"))
-        #缓存，方便推理不传环境变量
-        with open(TRAIN_CONFIG_CACHE, mode='w', encoding='utf-8') as __f:
-            json.dump(__config_path, __f)
-
-    with open(__config_path,mode='r',encoding='utf-8') as __f:
-        train_info_args = yaml.full_load(__f)
-    return train_info_args
-
-train_info_args = load_config()
-global_args = train_info_args.pop("global_args")
-train_model_config = MODELS_MAP[global_args["model_name"]]
+config_args = load_yaml(os.environ.get('train_file', os.path.join(__CUR_PATH__, 'train_pl.yaml')))
+global_args = config_args.pop("global_args")
+global_models_mapper = config_args.pop("global_models_mapper")
+colossalai_strategy = config_args.pop("colossalai_strategy", {})
+train_model_config = global_models_mapper[global_args["model_name"]]
 
 
 def merge_from_env(global_args):
@@ -57,7 +56,7 @@ def merge_from_env(global_args):
 
 merge_from_env(global_args)
 
-def patch_args(train_info_args):
+def patch_args(config_args):
     assert global_args["trainer_backend"] in ["pl", "hf", "cl", "ac"]
     global_args["precision"] = str(global_args["precision"])
 
@@ -72,10 +71,10 @@ def patch_args(train_info_args):
     assert global_args["enable_lora"] + global_args["enable_ptv2"] <= 1 , ValueError("lora ptv2 cannot open at same time")
 
     #更新模型配置
-    train_info_args.update(train_model_config)
+    config_args.update(train_model_config)
 
     if global_args["trainer_backend"] == "cl":
-        train_info_args["strategy"] = colossalai_strategy[train_info_args["strategy"]]
+        config_args["strategy"] = colossalai_strategy[config_args["strategy"]]
 
     if global_args['quantization_config'] is not None:
         global_args['quantization_config'].load_in_4bit = global_args["load_in_bit"] == 4
@@ -87,44 +86,44 @@ def patch_args(train_info_args):
 
     if global_args["enable_lora"]:
         # 检查lora adalora是否开启
-        assert train_info_args.get('lora', {}).get('with_lora', False) + \
-               train_info_args.get('adalora', {}).get('with_lora', False) + \
-               train_info_args.get('ia3', {}).get('with_lora', False) == 1, ValueError(
+        assert config_args.get('lora', {}).get('with_lora', False) + \
+               config_args.get('adalora', {}).get('with_lora', False) + \
+               config_args.get('ia3', {}).get('with_lora', False) == 1, ValueError(
             'lora adalora ia3 can set one at same time !')
 
         model_type = train_model_config['model_type']
-        if train_info_args.get('lora', {}).get('with_lora', False):
-            train_info_args["lora"]["target_modules"] = TRANSFORMERS_MODELS_TO_LORA_TARGET_MODULES_MAPPING[model_type]
-        elif train_info_args.get('adalora', {}).get('with_lora', False):
-            train_info_args["adalora"]["target_modules"] = TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING[model_type]
+        if config_args.get('lora', {}).get('with_lora', False):
+            config_args["lora"]["target_modules"] = TRANSFORMERS_MODELS_TO_LORA_TARGET_MODULES_MAPPING[model_type]
+        elif config_args.get('adalora', {}).get('with_lora', False):
+            config_args["adalora"]["target_modules"] = TRANSFORMERS_MODELS_TO_ADALORA_TARGET_MODULES_MAPPING[model_type]
         else:
-            train_info_args["ia3"]["target_modules"] = TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING[model_type]
-            train_info_args["ia3"]["feedforward_modules"] = TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING[model_type]
+            config_args["ia3"]["target_modules"] = TRANSFORMERS_MODELS_TO_IA3_TARGET_MODULES_MAPPING[model_type]
+            config_args["ia3"]["feedforward_modules"] = TRANSFORMERS_MODELS_TO_IA3_FEEDFORWARD_MODULES_MAPPING[model_type]
 
-        train_info_args.pop('prompt', None)
+        config_args.pop('prompt', None)
 
     elif global_args["enable_ptv2"]:
-        train_info_args.pop('lora', None)
-        train_info_args.pop('adalora', None)
-        train_info_args.pop('ia3', None)
-        if "gradient_checkpointing" in train_info_args:
-            train_info_args[ "gradient_checkpointing" ] = False
+        config_args.pop('lora', None)
+        config_args.pop('adalora', None)
+        config_args.pop('ia3', None)
+        if "gradient_checkpointing" in config_args:
+            config_args[ "gradient_checkpointing" ] = False
 
-        assert "prompt" in train_info_args
-        train_info_args["prompt"]["with_prompt"] = True
+        assert "prompt" in config_args
+        config_args["prompt"]["with_prompt"] = True
     else:
-        train_info_args.pop('lora',None)
-        train_info_args.pop('adalora', None)
-        train_info_args.pop('ia3', None)
-        train_info_args.pop('prompt', None)
+        config_args.pop('lora',None)
+        config_args.pop('adalora', None)
+        config_args.pop('ia3', None)
+        config_args.pop('prompt', None)
 
     # 预处理
-    if 'rwkv' in (train_info_args['model_type'] or train_info_args['model_name_or_path']).lower():
-        train_info_args['use_fast_tokenizer'] = True
+    if 'rwkv' in (config_args['model_type'] or config_args['model_name_or_path']).lower():
+        config_args['use_fast_tokenizer'] = True
 
 
 
-patch_args(train_info_args)
+patch_args(config_args)
 
 def get_deepspeed_config(precision='fp16'):
     '''
@@ -152,17 +151,17 @@ def get_deepspeed_config(precision='fp16'):
         optimizer = deepspeed_config.get('optimizer',None)
         if optimizer:
             if global_args["trainer_backend"] == 'hf':
-                optimizer[ 'params' ][ 'betas' ] = (train_info_args.get('adam_beta1', 0.9),train_info_args.get('adam_beta2', 0.999),)
-                optimizer[ 'params' ][ 'lr' ] = train_info_args.get('learning_rate', 2e-5)
-                optimizer[ 'params' ][ 'eps' ] = train_info_args.get('adam_epsilon', 1e-8)
+                optimizer[ 'params' ][ 'betas' ] = (config_args.get('adam_beta1', 0.9),config_args.get('adam_beta2', 0.999),)
+                optimizer[ 'params' ][ 'lr' ] = config_args.get('learning_rate', 2e-5)
+                optimizer[ 'params' ][ 'eps' ] = config_args.get('adam_epsilon', 1e-8)
                 # deepspeed_offload 优化器有效
-                train_info_args[ 'optim' ] = optimizer[ 'type' ]
+                config_args[ 'optim' ] = optimizer[ 'type' ]
             else:
-                optimizer['params']['betas'] = train_info_args.get('optimizer_betas', (0.9, 0.999))
-                optimizer['params']['lr'] = train_info_args.get('learning_rate', 2e-5)
-                optimizer['params']['eps'] = train_info_args.get('adam_epsilon', 1e-8)
+                optimizer['params']['betas'] = config_args.get('optimizer_betas', (0.9, 0.999))
+                optimizer['params']['lr'] = config_args.get('learning_rate', 2e-5)
+                optimizer['params']['eps'] = config_args.get('adam_epsilon', 1e-8)
                 # deepspeed_offload 优化器有效
-                train_info_args['optimizer'] = optimizer['type']
+                config_args['optimizer'] = optimizer['type']
 
     if precision == 'bf16':
         if 'fp16' in deepspeed_config:

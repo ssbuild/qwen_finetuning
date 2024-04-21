@@ -3,12 +3,12 @@
 import copy
 import json
 import random
+from distutils.command.config import config
 from enum import Enum
 from typing import Tuple, List
 
 import numpy as np
-from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer
-# from aigc_zoo.model_zoo.qwen.qwen_generation_utils import make_context
+# from deep_training.zoo.model_zoo.llm.qwen_generation_utils import make_context
 from transformers import PreTrainedTokenizer
 
 
@@ -30,14 +30,14 @@ def make_context(
 
     if chat_format == "chatml":
         im_start, im_end = "<|im_start|>", "<|im_end|>"
-        im_start_tokens = [tokenizer.im_start_id]
-        im_end_tokens = [tokenizer.im_end_id]
-        nl_tokens = tokenizer.encode("\n")
+        im_start_tokens = tokenizer.encode(im_start, add_special_tokens=False)
+        im_end_tokens = tokenizer.encode(im_end, add_special_tokens=False)
+        nl_tokens = tokenizer.encode("\n", add_special_tokens=False)
 
         def _tokenize_str(role, content):
             return f"{role}\n{content}", tokenizer.encode(
-                role, allowed_special=set()
-            ) + nl_tokens + tokenizer.encode(content, allowed_special=set())
+                role
+            ) + nl_tokens + tokenizer.encode(content)
 
         system_text, system_tokens_part = _tokenize_str("system", system)
         system_tokens = im_start_tokens + system_tokens_part + im_end_tokens
@@ -101,7 +101,7 @@ class TokenIdsMaker:
         input_ids = np.asarray(input_ids, dtype=np.int32)
         labels = np.asarray(labels, dtype=np.int32)
         if pad_len:
-            pad_val = config.eos_token_id or tokenizer.eos_token_id
+            pad_val = tokenizer.eos_token_id
             input_ids = np.pad(input_ids, (0, pad_len), 'constant', constant_values=(pad_val, pad_val))
             labels = np.pad(labels, (0, pad_len), 'constant', constant_values=(-100, -100))
         d = {
@@ -112,7 +112,7 @@ class TokenIdsMaker:
         return d
 
     @classmethod
-    def tunction(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sup=True):
+    def tunction(cls, tokenizer: PreTrainedTokenizer,config, paragraph, max_seq_length, sup=True):
         sptoken = []
         ds = []
         prefix = None
@@ -140,7 +140,7 @@ class TokenIdsMaker:
                     b_ids.pop(-1)
                 else:
                     a_ids.pop(0)
-            b_ids += [ config.eos_token_id ]
+            b_ids += [ tokenizer.eos_token_id ]
             input_ids = a_ids + b_ids
             labels = copy.deepcopy(input_ids) if not sup else [ -100 ] * len(a_ids) + copy.deepcopy(b_ids)
             input_ids = sptoken + input_ids
@@ -151,7 +151,7 @@ class TokenIdsMaker:
 
 
     @classmethod
-    def slidding(cls, tokenizer: QWenTokenizer,config, paragraph, max_seq_length, sliding_size = None,src_max_length=None,dst_max_length=None,sup=True):
+    def slidding(cls, tokenizer: PreTrainedTokenizer,config, paragraph, max_seq_length, sliding_size = None,src_max_length=None,dst_max_length=None,sup=True):
         if sliding_size is None:
             sliding_size = max_seq_length
         ds = []
@@ -182,7 +182,7 @@ class TokenIdsMaker:
             if dst_max_length and dst_max_length > 0:
                 b_ids = b_ids[ :dst_max_length ]
 
-            input_ids_qa = a_ids + b_ids + [config.eos_token_id]
+            input_ids_qa = a_ids + b_ids + [tokenizer.eos_token_id]
             if sup:
                 labels_all = [-100] * len(a_ids) + b_ids
             else:

@@ -20,12 +20,12 @@
 ### 单机多卡
 ```text
 可见的前两块卡
-train_info_args = {
+config_args = {
     'devices': 2,
 }
 
 # 第一块 和 第三块卡
-train_info_args = {
+config_args = {
     'devices': [0,2],
 }
 ```

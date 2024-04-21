@@ -11,18 +11,17 @@ from lightning import Trainer
 from lightning.pytorch.callbacks import LearningRateMonitor
 from lightning.pytorch.strategies import DeepSpeedStrategy
 from transformers import HfArgumentParser
-from data_utils import NN_DataHelper, train_info_args, get_deepspeed_config,global_args
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer, QWenTokenizer,PetlArguments,PromptArguments,QWenConfig, setup_model_profile
+from data_utils import NN_DataHelper, config_args, get_deepspeed_config,global_args
+from transformers import HfArgumentParser, PreTrainedTokenizer,PretrainedConfig
+from deep_training.zoo.model_zoo.llm.llm_model import MyTransformer, PetlArguments,PromptArguments
 
 assert global_args["trainer_backend"] == "pl"
             
 def main():
     parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments,PromptArguments))
-    model_args, training_args, data_args, lora_args,prompt_args = parser.parse_dict(train_info_args)
+    model_args, training_args, data_args, lora_args,prompt_args = parser.parse_dict(config_args)
     lora_args = lora_args.config
     prompt_args = prompt_args.config
-
-    setup_model_profile()
 
     output_weight_dir = './best_ckpt'
 
@@ -30,10 +29,7 @@ def main():
     config_kwargs = {"torch_dtype": torch.float16}
     if global_args["config_merge"]:
         config_kwargs.update(global_args["config_merge"])
-    config: QWenConfig
-    tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,
-                                                                   config_class_name=QWenConfig,
-                                                                   config_kwargs=config_kwargs)
+    tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(config_kwargs=config_kwargs)
 
 
 

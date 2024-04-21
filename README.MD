@@ -2,13 +2,14 @@
 - [deep_training](https://github.com/ssbuild/deep_training)
 
 ```text
-    12-02 update qwen model 1.8b 7b 12b 72b 
-    10-09 support accelerator trainer
-    10-07 support colossalai trainer
-    09-26 support transformers trainer
-    09-25 0.2.4 support qwen-7b 新版 和 qwen-14b ， 旧版不再支持，旧版可以安装 deep_training <= 0.2.3
+    2024-04-22 简化
+    2023-12-02 update qwen model 1.8b 7b 12b 72b 
+    2023-10-09 support accelerator trainer
+    2023-10-07 support colossalai trainer
+    2023-09-26 support transformers trainer
+    2023-09-25 0.2.4 support qwen-7b 新版 和 qwen-14b ， 旧版不再支持，旧版可以安装 deep_training <= 0.2.3
                 support transformers trainer
-    08-11 aigc-zoo 0.1.17.post0 update config , 更新下官方权重配置文件 
+    2023-08-11 aigc-zoo 0.1.17.post0 update config , 更新下官方权重配置文件 
     dev 分支加一些新功能和想法 如果求稳定，请使用 stable分支
 
 ```
@@ -30,15 +31,12 @@ pip install csrc/rotary
 
 
 ## weight
- - [Qwen-1_8B](https://huggingface.co/Qwen/Qwen-1_8B)
- - [Qwen-1_8B-Chat](https://huggingface.co/Qwen/Qwen-1_8B-Chat)
- - [Qwen-7B](https://huggingface.co/Qwen/Qwen-7B)
- - [Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat)
- - [Qwen-14B](https://huggingface.co/Qwen/Qwen-14B)
- - [Qwen-14B-Chat](https://huggingface.co/Qwen/Qwen-14B-Chat)
- - [Qwen-72B](https://huggingface.co/Qwen/Qwen-72B)
- - [Qwen-72B-Chat](https://huggingface.co/Qwen/Qwen-72B-Chat)
+ - [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct)
 
+DeepSeek-R1-Distill-Qwen-1.5B	Qwen2.5-Math-1.5B	🤗 HuggingFace
+DeepSeek-R1-Distill-Qwen-7B	    Qwen2.5-Math-7B	🤗 HuggingFace
+DeepSeek-R1-Distill-Qwen-14B	Qwen2.5-14B	🤗 HuggingFace
+DeepSeek-R1-Distill-Qwen-32B	Qwen2.5-32B	🤗 HuggingFace
 
 ## data sample
 - [open_data 不定时开放新数据集](https://github.com/ssbuild/open_data)
@@ -135,8 +133,6 @@ a字段：对于普通对话，a即为回答。
 - [pytorch-task-example](https://github.com/ssbuild/pytorch-task-example)
 - [moss_finetuning](https://github.com/ssbuild/chatmoss_finetuning)
 - [chatglm_finetuning](https://github.com/ssbuild/chatglm_finetuning)
-- [chatglm2_finetuning](https://github.com/ssbuild/chatglm2_finetuning)
-- [chatglm3_finetuning](https://github.com/ssbuild/chatglm3_finetuning)
 - [t5_finetuning](https://github.com/ssbuild/t5_finetuning)
 - [llm_finetuning](https://github.com/ssbuild/llm_finetuning)
 - [llm_rlhf](https://github.com/ssbuild/llm_rlhf)

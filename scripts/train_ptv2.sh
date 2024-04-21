@@ -2,10 +2,10 @@
 
 export trainer_backend=pl
 
-train_config="./config/train_${trainer_backend}.yaml"
+train_file="../config/train_${trainer_backend}.yaml"
 
 # 强制覆盖配置文件
-export train_config=${train_config}
+export train_file=${train_file}
 export enable_deepspeed=false
 export enable_ptv2=true
 export enable_lora=false

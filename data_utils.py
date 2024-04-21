@@ -13,14 +13,13 @@ import json
 import typing
 import numpy as np
 import torch
-from aigc_zoo.model_zoo.qwen.qwen_generation_utils import get_ltor_masks_and_position_ids
 from deep_training.data_helper import DataHelper, ModelArguments, TrainingArguments, DataArguments, TrainingArgumentsHF, \
     TrainingArgumentsCL, TrainingArgumentsAC
 from fastdatasets.record import load_dataset as Loader, RECORD, WriterObject, gfile
 from tqdm import tqdm
-from transformers import HfArgumentParser, PreTrainedTokenizer
+from transformers import HfArgumentParser, PreTrainedTokenizer,PretrainedConfig
 from data_processer import DataStrategy, TokenIdsMaker
-from aigc_zoo.model_zoo.qwen.llm_model import QWenTokenizer,PetlArguments,QWenConfig,PromptArguments
+from deep_training.zoo.model_zoo.llm.llm_model import PetlArguments,PromptArguments
 from config import *
 data_conf = {
    'strategy': DataStrategy.truncation, # 数据策略选项
@@ -28,9 +27,9 @@ data_conf = {
         'sup': True, # 是否监督训练
     },
     DataStrategy.siding: {
-        'stride': int(train_info_args['max_seq_length'] / 3 * 2),
+        'stride': int(config_args['max_seq_length'] / 3 * 2),
         'sup': True, # 是否监督模式
-        "src_max_length": train_info_args['max_seq_length'] - 10,
+        "src_max_length": config_args['max_seq_length'] - 10,
         "dst_max_length": None,
     },
 
@@ -100,8 +99,8 @@ class NN_DataHelper(DataHelper):
 
 
         max_seq_length = self.max_seq_length_dict[mode]
-        tokenizer: QWenTokenizer = self.tokenizer # noqa
-        config: QWenConfig = self.config # noqa
+        tokenizer = self.tokenizer # noqa
+        config = self.config # noqa
 
         strategy = data_conf['strategy']
         if strategy == DataStrategy.truncation:
@@ -258,24 +257,24 @@ if __name__ == '__main__':
     if global_args["trainer_backend"] == "hf":
         parser = HfArgumentParser((ModelArguments, TrainingArgumentsHF, DataArguments, PetlArguments, PromptArguments),
                                   conflict_handler='resolve')
-        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,allow_extra_keys=True, )
+        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(config_args,allow_extra_keys=True, )
     elif global_args[ "trainer_backend" ] == "pl":
         parser = HfArgumentParser((ModelArguments, TrainingArguments, DataArguments, PetlArguments, PromptArguments))
-        model_args, training_args, data_args, lora_args, _ = parser.parse_dict(train_info_args)
+        model_args, training_args, data_args, lora_args, _ = parser.parse_dict(config_args)
     elif global_args["trainer_backend"] == "cl":
         parser = HfArgumentParser((ModelArguments, TrainingArgumentsCL, DataArguments, PetlArguments, PromptArguments),
                                   conflict_handler='resolve')
-        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,
+        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(config_args,
                                                                                          allow_extra_keys=True, )
     else:
         parser = HfArgumentParser((ModelArguments, TrainingArgumentsAC, DataArguments, PetlArguments, PromptArguments),
                                   conflict_handler='resolve')
-        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(train_info_args,
+        model_args, training_args, data_args, lora_args, prompt_args = parser.parse_dict(config_args,
                                                                                          allow_extra_keys=True, )
 
     lora_args = lora_args.config
     dataHelper = NN_DataHelper(model_args, training_args, data_args)
-    tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=QWenTokenizer,config_class_name=QWenConfig)
+    tokenizer, config, _,_ = dataHelper.load_tokenizer_and_config()
 
     # 缓存数据集
     print(f'to make dataset is overwrite_cache {data_args.overwrite_cache}')

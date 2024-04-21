@@ -6,30 +6,28 @@ sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
 
 import torch
 from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
-from transformers import HfArgumentParser, GenerationConfig
-from data_utils import train_info_args, NN_DataHelper, get_deepspeed_config
-from aigc_zoo.model_zoo.qwen.llm_model import MyTransformer,QWenTokenizer,setup_model_profile, QWenConfig,PetlArguments
+from transformers import HfArgumentParser, GenerationConfig,AutoConfig
+from data_utils import config_args, NN_DataHelper, get_deepspeed_config
+from deep_training.zoo.model_zoo.llm.llm_model import MyTransformer,PetlArguments
+from data_processer import make_context
 
 deep_config = get_deepspeed_config()
 
 
 if __name__ == '__main__':
-    train_info_args['seed'] = None
-    train_info_args['model_name_or_path'] = None
+    config_args['seed'] = None
+    config_args['model_name_or_path'] = None
 
     parser = HfArgumentParser((ModelArguments, ))
-    (model_args,) = parser.parse_dict(train_info_args,allow_extra_keys=True)
+    (model_args,) = parser.parse_dict(config_args,allow_extra_keys=True)
 
-    setup_model_profile()
 
     dataHelper = NN_DataHelper(model_args)
-    tokenizer: QWenTokenizer
-    tokenizer, _, _, _ = dataHelper.load_tokenizer_and_config(
-        tokenizer_class_name=QWenTokenizer, config_class_name=QWenConfig)
+    tokenizer, _, _, _ = dataHelper.load_tokenizer_and_config()
 
     ###################### 注意 选最新权重
     #选择最新的权重 ， 根据时间排序 选最新的
-    config = QWenConfig.from_pretrained('./best_ckpt')
+    config = AutoConfig.from_pretrained('./best_ckpt')
 
     # new_num_tokens = config.vocab_size
     # if config.task_specific_params is not None and config.task_specific_params.get('vocab_size', None) is not None:
@@ -70,16 +68,21 @@ if __name__ == '__main__':
     ]
     generation_config = GenerationConfig(**{
         "chat_format": "chatml",
-        "eos_token_id": 151643,
+        "eos_token_id": tokenizer.eos_token_id,
         "max_new_tokens": 512,
-        "pad_token_id": 151643,
-        # "stop_words_ids": [[151643]],
+        "pad_token_id": tokenizer.eos_token_id,
         "do_sample": True,
         "top_k": 0,
         "top_p": 0.8,
     })
     for input in text_list:
-        response, history = model.chat(tokenizer, input, history=[],generation_config=generation_config)
-        print("input",input)
+        _, input_ids = make_context(tokenizer, input)
+        input_ids = torch.tensor(input_ids)
+        input_ids = input_ids.unsqueeze(0)
+        response = model.generate(inputs=input_ids.cuda(), )
+        outputs = response.tolist()[0][len(input_ids[0]):]
+        response = tokenizer.decode(outputs, skip_special_tokens=True)
+
+        print("input", input)
         print("response", response)
 
