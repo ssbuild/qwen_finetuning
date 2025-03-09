@@ -1,0 +1,57 @@
+includes: [global.yaml, petl.yaml]
+
+# one of record lmdb arrow_stream arrow_file,parquet, 超大数据集可以使用 lmdb , 注 lmdb 存储空间比record大
+data_backend: parquet
+
+output_dir: ./outputs_ac
+overwrite_output_dir: true
+num_train_epochs: 20
+max_steps: -1
+save_safetensors: false
+save_strategy: steps
+save_steps: 1000
+save_total_limit: 10
+seed: 42
+fp16: true
+do_train: true
+train_file:
+- ../data/*.json
+
+do_eval: false
+do_predict: false
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 2
+gradient_accumulation_steps: 1
+evaluation_strategy: 'no'
+eval_steps: 100
+
+# adamw_hf , adamw_torch,adamw_torch_fused,adamw_torch_xla,adamw_apex_fused,
+# adafactor,adamw_anyprecision,sgd,adagrad,adamw_bnb_8bit,adamw_8bit,lion,lion_8bit,lion_32bit,
+# paged_adamw_32bit,paged_adamw_8bit,paged_lion_32bit,paged_lion_8bit,
+# lamb_fused_dp adagrad_cpu_dp adam_cpu_dp adam_fused_dp
+
+optim: adamw_torch
+
+# one of linear,cosine,cosine_with_restarts,polynomial,constant_with_warmup,inverse_sqrt,reduce_lr_on_plateau
+lr_scheduler_type: cosine
+torch_compile: false
+learning_rate: 2.0e-05
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_epsilon: 1.0e-08
+max_grad_norm: 1.0
+weight_decay: 0.0
+warmup_ratio: 0.03
+logging_strategy: steps
+logging_steps: 10
+tf32: false
+gradient_checkpointing: false
+max_seq_length: 512
+max_target_length: 100
+do_lower_case: null
+
+use_fast_tokenizer: false
+dataloader_drop_last: true
+dataloader_pin_memory: true
+dataloader_num_workers: 0
+log_level: info

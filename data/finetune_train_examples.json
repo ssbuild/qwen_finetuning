@@ -1,0 +1,300 @@
+{"id": 1, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 2, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 3, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 4, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 5, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 6, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 7, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 8, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 9, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 10, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 11, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 12, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 13, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 14, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 15, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 16, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 17, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 18, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 19, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 20, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 21, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 22, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 23, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 24, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 25, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 26, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 27, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 28, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 29, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 30, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 31, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 32, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 33, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 34, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 35, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 36, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 37, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 38, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 39, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 40, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 41, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 42, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 43, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 44, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 45, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 46, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 47, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 48, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 49, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 50, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 51, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 52, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 53, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 54, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 55, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 56, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 57, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 58, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 59, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 60, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 61, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 62, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 63, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 64, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 65, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 66, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 67, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 68, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 69, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 70, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 71, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 72, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 73, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 74, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 75, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 76, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 77, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 78, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 79, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 80, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 81, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 82, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 83, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 84, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 85, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 86, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 87, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 88, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 89, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 90, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 91, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 92, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 93, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 94, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 95, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 96, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 97, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 98, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 99, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 100, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 101, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 102, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 103, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 104, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 105, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 106, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 107, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 108, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 109, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 110, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 111, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 112, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 113, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 114, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 115, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 116, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 117, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 118, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 119, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 120, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 121, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 122, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 123, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 124, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 125, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 126, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 127, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 128, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 129, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 130, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 131, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 132, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 133, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 134, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 135, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 136, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 137, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 138, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 139, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 140, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 141, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 142, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 143, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 144, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 145, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 146, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 147, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 148, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 149, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 150, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 151, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 152, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 153, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 154, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 155, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 156, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 157, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 158, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 159, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 160, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 161, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 162, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 163, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 164, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 165, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 166, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 167, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 168, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 169, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 170, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 171, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 172, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 173, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 174, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 175, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 176, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 177, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 178, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 179, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 180, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 181, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 182, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 183, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 184, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 185, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 186, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 187, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 188, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 189, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 190, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 191, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 192, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 193, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 194, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 195, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 196, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 197, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 198, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 199, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 200, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 201, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 202, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 203, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 204, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 205, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 206, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 207, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 208, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 209, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 210, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 211, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 212, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 213, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 214, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 215, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 216, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 217, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 218, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 219, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 220, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 221, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 222, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 223, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 224, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 225, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 226, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 227, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 228, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 229, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 230, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 231, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 232, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 233, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 234, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 235, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 236, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 237, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 238, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 239, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 240, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 241, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 242, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 243, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 244, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 245, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 246, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 247, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 248, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 249, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 250, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 251, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 252, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 253, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 254, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 255, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 256, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 257, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 258, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 259, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 260, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 261, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 262, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 263, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 264, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 265, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 266, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 267, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 268, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 269, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 270, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 271, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 272, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 273, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 274, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 275, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 276, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 277, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 278, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 279, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 280, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 281, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 282, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 283, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 284, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 285, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 286, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 287, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 288, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 289, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 290, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 291, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 292, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 293, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 294, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 295, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 296, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 297, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}
+{"id": 298, "paragraph": [{"q": "你好", "a": "我是Qwen-VL,一个支持视觉输入的大模型。"}]}
+{"id": 299, "paragraph": [{"q": "Picture 1: <img>../assets/demo.jpeg</img>\n图中的狗是什么品种？", "a": "图中是一只拉布拉多犬。"}, {"q": "框出图中的格子衬衫", "a": "<ref>格子衬衫</ref><box>(588,499),(725,789)</box>"}]}
+{"id": 300, "paragraph": [{"q": "Picture 1: <img>../assets/Chongqing.jpeg</img>\nPicture 2: <img>../assets/Beijing.jpeg</img>\n图中都是哪", "a": "第一张图片是重庆的城市天际线，第二张图片是北京的天际线。"}]}

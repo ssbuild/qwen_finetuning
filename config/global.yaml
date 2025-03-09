@@ -1,0 +1,41 @@
+global_args:
+  trainer_backend: pl
+  enable_deepspeed: false
+  enable_ptv2: false
+  enable_lora: true
+  load_in_bit: 0
+  config_merge: {}
+  # 模型权重 ， 对应 config.constant_map.py
+  model_name: Qwen-VL-Chat
+
+  # one of auto 16 bf16 32
+  precision: auto
+  quantization_config:
+    load_in_8bit: false
+    load_in_4bit: false
+    llm_int8_threshold: 6.0
+    llm_int8_has_fp16_weight: false
+    bnb_4bit_compute_dtype: float16  # one of float16  bfloat16 float32
+    bnb_4bit_use_double_quant: true
+    bnb_4bit_quant_type: nf4
+    llm_int8_skip_modules:
+      - attn_pool.attn
+      - lm_head
+
+
+global_models_mapper:
+    Qwen-VL: 
+        model_type: qwen
+        model_name_or_path: /data/nlp/pre_models/torch/qwen/Qwen-VL
+        config_name: /data/nlp/pre_models/torch/qwen/Qwen-VL/config.json
+        tokenizer_name: /data/nlp/pre_models/torch/qwen/Qwen-VL/
+    
+
+    Qwen-VL-Chat: 
+        model_type: qwen
+        model_name_or_path: /data/nlp/pre_models/torch/qwen/Qwen-VL-Chat
+        config_name: /data/nlp/pre_models/torch/qwen/Qwen-VL-Chat/config.json
+        tokenizer_name: /data/nlp/pre_models/torch/qwen/Qwen-VL-Chat/
+    
+
+

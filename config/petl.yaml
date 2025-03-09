@@ -1,0 +1,77 @@
+
+##############  lora模块
+
+lora:
+  with_lora: true # 是否启用模块
+  lora_type: lora
+  r: 8
+  lora_alpha: 32
+  lora_dropout: 0.1
+  fan_in_fan_out: false
+  # Bias type for Lora. Can be 'none', 'all' or 'lora_only'"
+  bias: none
+  # "help": "List of modules apart from LoRA layers to be set as trainable and saved in the final checkpoint. "
+  modules_to_save: null
+  layers_to_transform: null
+  layers_pattern: null
+
+  # "The mapping from layer names or regexp expression to ranks which are different from the default rank specified by `r`. "
+  # "For example, `{model.decoder.layers.0.encoder_attn.k_proj: 8`}"
+  rank_pattern: {}
+
+  # "The mapping from layer names or regexp expression to alphas which are different from the default alpha specified by `lora_alpha`. "
+  # "For example, `{model.decoder.layers.0.encoder_attn.k_proj: 32`}"
+
+  alpha_pattern: {}
+adalora:
+  with_lora: false # 是否启用模块
+  lora_type: adalora
+  r: 8
+  lora_alpha: 32
+  lora_dropout: 0.1
+  fan_in_fan_out: false
+  # Bias type for Lora. Can be 'none', 'all' or 'lora_only'"
+  bias: none
+  # "help": "List of modules apart from LoRA layers to be set as trainable and saved in the final checkpoint. "
+  modules_to_save: null
+  layers_to_transform: null
+  layers_pattern: null
+  alpha_pattern: {}
+
+  # Target Lora matrix dimension.
+  target_r: 8
+  #Intial Lora matrix dimension.
+  init_r: 12
+  #The steps of initial warmup.
+  tinit: 0
+  #The steps of final warmup
+  tfinal: 0
+  #Step interval of rank allocation.
+  deltaT: 1
+  #Hyperparameter of EMA.
+  beta1: 0.85
+  #Hyperparameter of EMA.
+  beta2: 0.85
+  #The orthogonal regularization coefficient.
+  orth_reg_weight: 0.5
+
+  #The total training steps.
+  total_step: null
+
+   #The saved rank pattern.
+  rank_pattern: null
+
+ia3:
+  with_lora: false # 是否启用模块
+  fan_in_fan_out: false
+  # "help": "List of modules apart from LoRA layers to be set as trainable and saved in the final checkpoint. "
+  modules_to_save: null
+  init_ia3_weights: true
+
+##############  ptv2模块
+prompt:
+  with_prompt: true
+  prompt_type: prefix_tuning
+  task_type: causal_lm
+  prefix_projection: false
+  num_virtual_tokens: 32
